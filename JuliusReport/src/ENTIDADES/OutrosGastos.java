@@ -28,14 +28,14 @@ import java.util.logging.Logger;
  *
  * @author mgarcia
  */
-public class Abastecimento {
-    Date Data;
-    Double ValorTotal;
-    int TipoCombustivel; //referencia Combustivel.IdCombustivel
-    Double ValorLitro;
-    int IdAbastecimento;
+public class OutrosGastos {
+    private Date Data;
+    private Double Valor;
+    private String Desc;
+    private int IdOutrosGastos;
     
-    //recebe uma string dd-MM-yyyy como data e joga exceções pra cima
+    
+    
     public void setData(String d) throws ParseException{
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         this.Data = df.parse(d);
@@ -45,21 +45,19 @@ public class Abastecimento {
         this.Data = d;
     }
     
-    public void serValorTotal(Double v) {
-        this.ValorTotal = v;
+    public void setValor(Double v) {
+        this.Valor = v;
     }
     
-    public void setTipoCombustivel(int t) {
-        this.TipoCombustivel = t;
+    public void setDesc(String d) {
+        this.Desc = d;
     }
     
-    public void setValorLitro(Double v) {
-        this.ValorLitro = v;
+    public void setIdOutrosGastos(int i) {
+        this.IdOutrosGastos = i;
     }
     
-    public void setIdAbastecimento(int i) {
-        this.IdAbastecimento = i;
-    }
+    
     
     //retorna uma string formatada como dd/MM/yyyy com a data
     public String getData() {
@@ -70,24 +68,21 @@ public class Abastecimento {
              return out.format(in.parse(this.Data.toString()));
         } catch (ParseException ex) {
             Logger.getLogger(Abastecimento.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Erro em Abastecimento.getData()");
+            System.out.println("Erro em OutrosGastos.getData()");
         }
         return "00/00/0000";
     }
+    
+    public Double getValor() {
+        return this.Valor;
+    }
+    
+    public String getDesc() {
+        return this.Desc;
+    }
+    
+    public int getIdOutrosGastos() {
+        return this.IdOutrosGastos;
+    }
 
-    public Double getValorTotal() {
-        return this.ValorTotal;
-    }
-    
-    public int getTipoCombustivel() {
-        return this.TipoCombustivel;
-    }
-    
-    public Double getValorLitro() {
-        return this.ValorLitro;
-    }
-    
-    public int getIdAbastecimento() {
-        return this.IdAbastecimento;
-    }
 }

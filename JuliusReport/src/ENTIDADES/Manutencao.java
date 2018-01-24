@@ -28,14 +28,16 @@ import java.util.logging.Logger;
  *
  * @author mgarcia
  */
-public class Abastecimento {
-    Date Data;
-    Double ValorTotal;
-    int TipoCombustivel; //referencia Combustivel.IdCombustivel
-    Double ValorLitro;
-    int IdAbastecimento;
+public class Manutencao {
+    public Date Data;
+    public int Km;
+    public Double ValorPecas;
+    public Double ValorServ;
+    public String Servico;
+    public int IdManutencao;
     
-    //recebe uma string dd-MM-yyyy como data e joga exceções pra cima
+    
+    
     public void setData(String d) throws ParseException{
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         this.Data = df.parse(d);
@@ -45,21 +47,27 @@ public class Abastecimento {
         this.Data = d;
     }
     
-    public void serValorTotal(Double v) {
-        this.ValorTotal = v;
+    public void setKm(int k) {
+        this.Km = k;
     }
     
-    public void setTipoCombustivel(int t) {
-        this.TipoCombustivel = t;
+    public void setValorPecas(Double v) {
+        this.ValorPecas = v;
     }
     
-    public void setValorLitro(Double v) {
-        this.ValorLitro = v;
+    public void setValorServ(Double v) {
+        this.ValorServ = v;
     }
     
-    public void setIdAbastecimento(int i) {
-        this.IdAbastecimento = i;
+    public void setServico(String s) {
+        this.Servico = s;
     }
+    
+    public void setIdManutencao(int i) {
+        this.IdManutencao = i;
+    }
+    
+    
     
     //retorna uma string formatada como dd/MM/yyyy com a data
     public String getData() {
@@ -70,24 +78,36 @@ public class Abastecimento {
              return out.format(in.parse(this.Data.toString()));
         } catch (ParseException ex) {
             Logger.getLogger(Abastecimento.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Erro em Abastecimento.getData()");
+            System.out.println("Erro em Manutencao.getData()");
         }
         return "00/00/0000";
     }
-
-    public Double getValorTotal() {
-        return this.ValorTotal;
+    
+    public int getKm() {
+        return this.Km;
     }
     
-    public int getTipoCombustivel() {
-        return this.TipoCombustivel;
+    public Double getValorPecas() {
+        return this.ValorPecas;
     }
     
-    public Double getValorLitro() {
-        return this.ValorLitro;
+    public Double getValorServ() {
+        return this.ValorServ;
     }
     
-    public int getIdAbastecimento() {
-        return this.IdAbastecimento;
+    public String getServico() {
+        return this.Servico;
     }
+    
+    public int getIdManutencao() {
+        return this.IdManutencao;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }
