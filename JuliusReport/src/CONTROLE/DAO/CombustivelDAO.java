@@ -16,8 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package CONTROLE;
+package CONTROLE.DAO;
 
+import CONTROLE.ConnectionFactory;
+import CONTROLE.DAO.DAO;
 import ENTIDADES.Combustivel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

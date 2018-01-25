@@ -16,13 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package CONTROLE;
+package CONTROLE.DAO;
 
-import ENTIDADES.Abastecimento;
+import CONTROLE.ConnectionFactory;
+import ENTIDADES.Rendimento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,34 +30,42 @@ import java.util.logging.Logger;
  *
  * @author mgarcia
  */
-public class AbastecimentoDAO /*implements DAO*/ {
+public class RendimentoDAO implements DAO {
 
-    //@Override
-    public void salvar(Object c) {
-        if (c instanceof Abastecimento) {
-            Abastecimento abastecimento = (Abastecimento) c;
-            //formatador me ajudará a manipular as datas nos processos de I/O no DB
-            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-            String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?)";
+    @Override
+    public void salvar(Object o) {
+        if (o instanceof Rendimento) {
+            Rendimento rendimento = (Rendimento) o;
+            String sql = "INSERT INTO Rendimento VALUES(?,?,?,?)";
             try {
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, formatador.format(abastecimento.getData())); //so proud to understand dat shit
-                ps.setDouble(2, abastecimento.getValorTotal());
-                ps.setInt(3, abastecimento.getTipoCombustivel());
-                ps.setDouble(4, abastecimento.getValorLitro());
+                ps.setDouble(1, rendimento.getKmL());
+                ps.setInt(2, rendimento.getTrajeto());
+                ps.setInt(3,rendimento.getArCond());
+                ps.setInt(4, rendimento.getAbastecimento());
                 ps.execute();
-                
-                
+                System.out.println("Rendimento Registrado.");
                 
             } catch (SQLException ex) {
-                Logger.getLogger(AbastecimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CombustivelDAO.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Erro " + ex);
             }
-            
-            
+
         } else {
-            System.out.println("O objeto informado não é da classe Abastecimento");
+            System.out.println("O objeto informado não é da classe Rendimento");
         }
+
+    }
+
+    @Override
+    public void atualizar(Object o) {
+        System.out.println("Não implementado..");
+    }
+
+    @Override
+    public void excluir(Object o) {
+        System.out.println("Não implementado..");
     }
 
 }

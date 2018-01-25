@@ -18,17 +18,9 @@
  */
 package TESTES;
 
-import CONTROLE.AbastecimentoDAO;
-import CONTROLE.CombustivelDAO;
-import CONTROLE.ConnectionFactory;
-import ENTIDADES.Abastecimento;
-import ENTIDADES.Combustivel;
-import java.sql.Connection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import CONTROLE.DAO.TrajetoDAO;
+import ENTIDADES.Trajeto;
+
 
 /**
  *
@@ -36,13 +28,22 @@ import java.util.logging.Logger;
  */
 public class teste {
     public static void main(String[] args) {
-        Abastecimento a = new Abastecimento();
-        a.setData(new Date());
-        a.setTipoCombustivel(1);
-        a.setValorTotal(150.0);
-        a.setValorLitro(3.88);
-        AbastecimentoDAO aD = new AbastecimentoDAO();
-        aD.salvar(a);
+       Trajeto t = new Trajeto();
+       TrajetoDAO tD = new TrajetoDAO();
+       
+       t.setNome("Cidade");
+       tD.salvar(t);
+       t.setNome("Estrada - Montanhas");
+       tD.salvar(t);
+       t.setNome("Estrada - Planicies");
+       tD.salvar(t);
+       t.setNome("Estrada - condições diversas");
+       tD.salvar(t);
+       t.setNome("Trafego Misto Cidade/Estrada");
+       tD.salvar(t);
+       
+        
+        
     
     }
 }
