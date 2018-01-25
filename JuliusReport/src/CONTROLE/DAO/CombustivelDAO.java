@@ -34,21 +34,15 @@ import java.util.logging.Logger;
 public class CombustivelDAO implements DAO{
     
     @Override
-    public void salvar(Object o) {
+    public void salvar(Object o) throws SQLException{
         if (o instanceof Combustivel) {
             Combustivel combustivel = (Combustivel) o;
             String sql = "INSERT INTO Combustivel VALUES (?)";
-            try {
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, combustivel.getNome());
                 ps.execute();
                 System.out.println("Abastecimento registrado.");
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(CombustivelDAO.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Erro "+ex);
-            }
             
             
         } else {

@@ -16,34 +16,39 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package TESTES;
-
-import CONTROLE.DAO.TrajetoDAO;
-import ENTIDADES.Trajeto;
-
+package ENTIDADES;
 
 /**
  *
  * @author mgarcia
  */
-public class teste {
-    public static void main(String[] args) {
-       Trajeto t = new Trajeto();
-       TrajetoDAO tD = new TrajetoDAO();
-       
-       t.setNome("Cidade");
-       tD.salvar(t);
-       t.setNome("Estrada - Montanhas");
-       tD.salvar(t);
-       t.setNome("Estrada - Planicies");
-       tD.salvar(t);
-       t.setNome("Estrada - condições diversas");
-       tD.salvar(t);
-       t.setNome("Trafego Misto Cidade/Estrada");
-       tD.salvar(t);
-       
-        
-        
+public class Usuario {
+    private String Login;
+    private String Senha;
+    private int IdUsuario;
     
+    public void setlogin(String n) {
+        this.Login = n;
+    }
+    
+    public void setSenha(String s) {
+        this.Senha = s;
+    }
+    
+    public void setIdUsuario(int id) {
+        this.IdUsuario = id;
+    }
+    
+    
+    public int getIdUsuario() {
+        return this.IdUsuario;
+    }
+    
+    public String getLogin() {
+        return this.Login;
+    }
+    
+    public String getSenha() {
+        return this.Senha;
     }
 }

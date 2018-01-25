@@ -9,6 +9,11 @@
 	Sim, eu sei... o estilo é PHP mas o 
 	codigo é Java.. Não pergunte, só aceite.
 */
+CREATE TABLE Usuario (
+    Login VARCHAR(40) UNIQUE NOT NULL,
+    Senha VARCHAR(255) NOT NULL
+);
+
 
 CREATE TABLE Combustivel (
 	Nome VARCHAR(30) UNIQUE

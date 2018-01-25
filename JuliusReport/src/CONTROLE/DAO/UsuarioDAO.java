@@ -19,7 +19,7 @@
 package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
-import ENTIDADES.Trajeto;
+import ENTIDADES.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -30,20 +30,22 @@ import java.util.logging.Logger;
  *
  * @author mgarcia
  */
-public class TrajetoDAO implements DAO{
+public class UsuarioDAO implements DAO{
 
     @Override
     public void salvar(Object o) throws SQLException{
-        if (o instanceof Trajeto) {
-            Trajeto trajeto = (Trajeto) o;
-            String sql = "INSERT INTO Trajeto VALUES (?)";
+        if (o instanceof Usuario) {
+            Usuario usuario = (Usuario) o;
+            String sql = "INSERT INTO Usuario VALUES (?,?)";
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, trajeto.getNome());
+                ps.setString(1, usuario.getLogin());
+                ps.setString(2, usuario.getSenha());
                 ps.execute();
-                System.out.println("Trajeto registrado.");
+                System.out.println("Usuario registrado.");
+
         } else {
-            System.out.println("O objeto informado não é um Trajeto");
+            System.out.println("O objeto informado nao é um usuario.");
         }
     }
 

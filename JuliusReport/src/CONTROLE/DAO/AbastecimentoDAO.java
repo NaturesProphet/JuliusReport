@@ -34,13 +34,12 @@ import java.util.logging.Logger;
 public class AbastecimentoDAO implements DAO {
 
     @Override
-    public void salvar(Object c) {
+    public void salvar(Object c) throws SQLException{
         if (c instanceof Abastecimento) {
             Abastecimento abastecimento = (Abastecimento) c;
             //formatador me ajudará a manipular as datas nos processos de I/O no DB
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?)";
-            try {
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, formatador.format(abastecimento.getData())); //so proud to understand dat shit
@@ -48,10 +47,6 @@ public class AbastecimentoDAO implements DAO {
                 ps.setInt(3, abastecimento.getTipoCombustivel());
                 ps.setDouble(4, abastecimento.getValorLitro());
                 ps.execute();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(AbastecimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
         } else {
             System.out.println("O objeto informado não é da classe Abastecimento");

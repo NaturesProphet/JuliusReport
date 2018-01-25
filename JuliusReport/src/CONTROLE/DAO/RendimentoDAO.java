@@ -33,11 +33,10 @@ import java.util.logging.Logger;
 public class RendimentoDAO implements DAO {
 
     @Override
-    public void salvar(Object o) {
+    public void salvar(Object o) throws SQLException{
         if (o instanceof Rendimento) {
             Rendimento rendimento = (Rendimento) o;
             String sql = "INSERT INTO Rendimento VALUES(?,?,?,?)";
-            try {
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setDouble(1, rendimento.getKmL());
@@ -46,11 +45,6 @@ public class RendimentoDAO implements DAO {
                 ps.setInt(4, rendimento.getAbastecimento());
                 ps.execute();
                 System.out.println("Rendimento Registrado.");
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(CombustivelDAO.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Erro " + ex);
-            }
 
         } else {
             System.out.println("O objeto informado não é da classe Rendimento");

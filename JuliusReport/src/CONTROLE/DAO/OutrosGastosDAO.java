@@ -33,11 +33,10 @@ import java.util.logging.Logger;
 public class OutrosGastosDAO implements DAO {
 
     @Override
-    public void salvar(Object o) {
+    public void salvar(Object o) throws SQLException{
         if (o instanceof OutrosGastos) {
             OutrosGastos outrosgastos = (OutrosGastos) o;
             String sql = "INSERT INTO OutrosGastos VALUES (?,?,?)";
-            try {
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, outrosgastos.getDataAsString());
@@ -45,11 +44,6 @@ public class OutrosGastosDAO implements DAO {
                 ps.setString(3, outrosgastos.getDesc());
                 ps.execute();
                 System.out.println("Outros Gastos registrado.");
-
-            } catch (SQLException ex) {
-                Logger.getLogger(CombustivelDAO.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Erro " + ex);
-            }
 
         } else {
             System.out.println("O objeto informado não é um OutrosGastos");
