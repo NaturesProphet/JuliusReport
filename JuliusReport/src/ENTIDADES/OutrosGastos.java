@@ -29,58 +29,51 @@ import java.util.logging.Logger;
  * @author mgarcia
  */
 public class OutrosGastos {
+
     private Date Data;
     private Double Valor;
     private String Desc;
     private int IdOutrosGastos;
-    
-    
-    
-    public void setData(String d) throws ParseException{
+
+    public void setData(String d) throws ParseException {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         this.Data = df.parse(d);
     }
-    
+
     public void setData(Date d) {
         this.Data = d;
     }
-    
+
     public void setValor(Double v) {
         this.Valor = v;
     }
-    
+
     public void setDesc(String d) {
         this.Desc = d;
     }
-    
+
     public void setIdOutrosGastos(int i) {
         this.IdOutrosGastos = i;
     }
-    
-    
-    
+
     //retorna uma string formatada como dd/MM/yyyy com a data
-    public String getData() {
-        SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
- 
-        try {
-             return out.format(in.parse(this.Data.toString()));
-        } catch (ParseException ex) {
-            Logger.getLogger(Abastecimento.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Erro em OutrosGastos.getData()");
-        }
-        return "00/00/0000";
+    public String getDataAsString() {
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        return formatador.format(this.Data);
     }
     
+    public Date getData() {
+        return this.Data;
+    }
+
     public Double getValor() {
         return this.Valor;
     }
-    
+
     public String getDesc() {
         return this.Desc;
     }
-    
+
     public int getIdOutrosGastos() {
         return this.IdOutrosGastos;
     }

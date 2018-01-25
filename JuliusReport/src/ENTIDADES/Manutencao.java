@@ -70,17 +70,13 @@ public class Manutencao {
     
     
     //retorna uma string formatada como dd/MM/yyyy com a data
-    public String getData() {
-        SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
- 
-        try {
-             return out.format(in.parse(this.Data.toString()));
-        } catch (ParseException ex) {
-            Logger.getLogger(Abastecimento.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Erro em Manutencao.getData()");
-        }
-        return "00/00/0000";
+    public String getDataAsString() {
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        return formatador.format(this.Data);
+    }
+    
+    public Date getData() {
+        return this.Data;
     }
     
     public int getKm() {
