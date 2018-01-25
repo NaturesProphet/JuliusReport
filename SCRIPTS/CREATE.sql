@@ -11,11 +11,11 @@
 */
 
 CREATE TABLE Combustivel (
-	Nome VARCHAR(30)
+	Nome VARCHAR(30) UNIQUE
 );
 
 CREATE TABLE Trajeto (
-	Nome VARCHAR(30)
+	Nome VARCHAR(30) UNIQUE
 );
 
 CREATE TABLE OutrosGastos (
@@ -54,3 +54,22 @@ CREATE TABLE Manutencao (
 	ValorServ FLOAT(5,2),
 	Servico VARCHAR(255) NOT NULL
 );
+
+
+/*
+	INSERÇÕES DE DADOS BÁSICOS NO BANCO
+*/
+
+INSERT INTO Combustivel VALUES 
+('Gasolina Comum'),
+('Gasolina Aditivada'),
+('Alcool Anidro');
+
+
+
+INSERT INTO Trajeto VALUES
+('Cidade'),
+('Trafego misto Cidade/Estrada'),
+('Estrada - Montanhas'),
+('Estrada - Planicies'),
+('Estrada - condições diversas');
