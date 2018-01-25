@@ -41,6 +41,7 @@ public class CombustivelDAO implements DAO{
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, combustivel.getNome());
                 ps.execute();
+                System.out.println("Abastecimento registrado.");
                 
             } catch (SQLException ex) {
                 Logger.getLogger(CombustivelDAO.class.getName()).log(Level.SEVERE, null, ex);

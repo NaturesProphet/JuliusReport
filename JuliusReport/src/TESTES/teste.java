@@ -18,10 +18,17 @@
  */
 package TESTES;
 
+import CONTROLE.AbastecimentoDAO;
 import CONTROLE.CombustivelDAO;
 import CONTROLE.ConnectionFactory;
+import ENTIDADES.Abastecimento;
 import ENTIDADES.Combustivel;
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,11 +36,13 @@ import java.sql.Connection;
  */
 public class teste {
     public static void main(String[] args) {
-        Combustivel c = new Combustivel();
-        c.setNome("Combustivel Teste");
-        CombustivelDAO dao = new CombustivelDAO();
-        dao.salvar(c);
+        Abastecimento a = new Abastecimento();
+        a.setData(new Date());
+        a.setTipoCombustivel(1);
+        a.setValorTotal(150.0);
+        a.setValorLitro(3.88);
+        AbastecimentoDAO aD = new AbastecimentoDAO();
+        aD.salvar(a);
+    
     }
-    
-    
 }

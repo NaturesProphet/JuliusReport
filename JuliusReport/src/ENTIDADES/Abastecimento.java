@@ -35,9 +35,9 @@ public class Abastecimento {
     Double ValorLitro;
     int IdAbastecimento;
     
-    //recebe uma string dd-MM-yyyy como data e joga exceções pra cima
+    //recebe uma string dd/MM/yyyy como data e joga exceções pra cima
     public void setData(String d) throws ParseException{
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         this.Data = df.parse(d);
     }
     
@@ -45,7 +45,7 @@ public class Abastecimento {
         this.Data = d;
     }
     
-    public void serValorTotal(Double v) {
+    public void setValorTotal(Double v) {
         this.ValorTotal = v;
     }
     
@@ -62,17 +62,13 @@ public class Abastecimento {
     }
     
     //retorna uma string formatada como dd/MM/yyyy com a data
-    public String getData() {
-        SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
- 
-        try {
-             return out.format(in.parse(this.Data.toString()));
-        } catch (ParseException ex) {
-            Logger.getLogger(Abastecimento.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Erro em Abastecimento.getData()");
-        }
-        return "00/00/0000";
+    public String getDataAsString() {
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        return formatador.format(this.Data);
+    }
+    
+    public Date getData() {
+        return this.Data;
     }
 
     public Double getValorTotal() {
