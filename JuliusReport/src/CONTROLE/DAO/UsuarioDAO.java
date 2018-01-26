@@ -37,11 +37,12 @@ public class UsuarioDAO implements DAO {
     public void salvar(Object o) throws SQLException {
         if (o instanceof Usuario) {
             Usuario usuario = (Usuario) o;
-            String sql = "INSERT INTO Usuario VALUES (?,?)";
+            String sql = "INSERT INTO Usuario VALUES (?,?,?)";
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, usuario.getLogin());
             ps.setString(2, usuario.getSenha());
+            ps.setString(3, usuario.getPatchToBD());
             ps.execute();
             System.out.println("Usuario registrado.");
 
@@ -72,6 +73,7 @@ public class UsuarioDAO implements DAO {
                 usuario.setIdUsuario(rs.getInt(1));
                 usuario.setlogin(rs.getString(2));
                 usuario.setSenha(rs.getString(3));
+                usuario.setPatchToBD(rs.getString(4));
                 
                 return usuario;
             }

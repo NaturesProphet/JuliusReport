@@ -11,7 +11,21 @@
 */
 CREATE TABLE Usuario (
     Login VARCHAR(40) UNIQUE NOT NULL,
-    Senha VARCHAR(255) NOT NULL
+    Senha VARCHAR(255) NOT NULL,
+    PatchToBD VARCHAR(255)
+);
+
+CREATE TABLE Veiculo (
+	Tipo VARCHAR(30) NOT NULL,
+	Marca VARCHAR(30) NOT NULL,
+	Modelo VARCHAR(45) NOT NULL,
+	Ano INT NOT NULL,
+	Cor VARCHAR(20),
+	Placa VARCHAR(8) UNIQUE NOT NULL,
+	Usuario INT NOT NULL,
+        CONSTRAINT FK_Veiculo_Usuario
+        FOREIGN KEY (Usuario)
+        REFERENCES Usuario (rowid)
 );
 
 
@@ -34,9 +48,10 @@ CREATE TABLE Abastecimento (
 	ValorTotal FLOAT(5,2),
 	TipoCombustivel INT,
 	ValorLitro FLOAT(2,2),
+        Posto VARCHAR(30),
 	CONSTRAINT FK_Abastecimento_Combustivel
 	FOREIGN KEY (TipoCombustivel)
-	REFERENCES Combustivel (IdCombustivel)
+	REFERENCES Combustivel (rowid)
 );
 
 CREATE TABLE Rendimento (
@@ -49,7 +64,7 @@ CREATE TABLE Rendimento (
 	REFERENCES Abastecimento (IdAbastecimento),
 	CONSTRAINT FK_Rendimento_Trajeto
 	FOREIGN KEY (Trajeto)
-	REFERENCES Trajeto (IdTrajeto)
+	REFERENCES Trajeto (rowid)
 );
 
 CREATE TABLE Manutencao (
@@ -78,3 +93,5 @@ INSERT INTO Trajeto VALUES
 ('Estrada - Montanhas'),
 ('Estrada - Planicies'),
 ('Estrada - condições diversas');
+
+.headers on

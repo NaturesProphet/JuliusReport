@@ -18,6 +18,9 @@
  */
 package ENTIDADES;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author mgarcia
@@ -25,7 +28,14 @@ package ENTIDADES;
 public class Usuario {
     private String Login;
     private String Senha;
+    private String PatchToBD;
+    private ArrayList<Veiculo> Frota;
     private int IdUsuario;
+    
+    public Usuario() {
+        this.Frota = new ArrayList<Veiculo>();
+    }
+    
     
     public void setlogin(String n) {
         this.Login = n;
@@ -33,6 +43,10 @@ public class Usuario {
     
     public void setSenha(String s) {
         this.Senha = s;
+    }
+    
+    public void setPatchToBD(String p) {
+        this.PatchToBD = p;
     }
     
     public void setIdUsuario(int id) {
@@ -50,5 +64,9 @@ public class Usuario {
     
     public String getSenha() {
         return this.Senha;
+    }
+    
+    public String getPatchToBD() {
+        return this.PatchToBD;
     }
 }

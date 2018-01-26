@@ -33,6 +33,7 @@ public class Abastecimento {
     Double ValorTotal;
     int TipoCombustivel; //referencia Combustivel.IdCombustivel
     Double ValorLitro;
+    String Posto;
     int IdAbastecimento;
     
     //recebe uma string dd/MM/yyyy como data e joga exceções pra cima
@@ -55,6 +56,10 @@ public class Abastecimento {
     
     public void setValorLitro(Double v) {
         this.ValorLitro = v;
+    }
+    
+    public void setPosto(String p) {
+        this.Posto = p;
     }
     
     public void setIdAbastecimento(int i) {
@@ -81,6 +86,10 @@ public class Abastecimento {
     
     public Double getValorLitro() {
         return this.ValorLitro;
+    }
+    
+    public String getPosto() {
+        return this.Posto;
     }
     
     public int getIdAbastecimento() {
