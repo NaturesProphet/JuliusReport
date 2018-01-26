@@ -24,7 +24,9 @@ import ENTIDADES.Combustivel;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,5 +63,24 @@ public class CombustivelDAO implements DAO{
     @Override
     public void excluir(Object o) {
         System.out.println("Método não implementado ainda..");
+    }
+    
+    public ArrayList<String> getAll() throws IOException, SQLException {
+        ArrayList<String> lista = new ArrayList();
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT rowid, Nome FROM Combustivel";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            String x = "" + rs.getInt(1) + " - ";
+            x += rs.getString(2);
+            lista.add(x);
+        }
+        ps.close();
+        con.close();
+        rs.close();
+        
+        
+        return lista;
     }
 }

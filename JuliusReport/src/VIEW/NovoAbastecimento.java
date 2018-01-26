@@ -18,20 +18,38 @@
  */
 package VIEW;
 
+import CONTROLE.DAO.AbastecimentoDAO;
+import CONTROLE.DAO.CombustivelDAO;
+import CONTROLE.ManipuladorData;
+import ENTIDADES.Abastecimento;
 import ENTIDADES.Usuario;
 import ENTIDADES.Veiculo;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author mgarcia
  */
 public class NovoAbastecimento extends javax.swing.JFrame {
+
     Usuario usuario;
     Veiculo veiculo;
 
     /**
      * Creates new form NovoAbastecimento
      */
+    public NovoAbastecimento(Usuario u, Veiculo v) {
+        initComponents();
+        usuario = u;
+        veiculo = v;
+    }
+
     public NovoAbastecimento() {
         initComponents();
     }
@@ -45,21 +63,283 @@ public class NovoAbastecimento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        diabox = new javax.swing.JComboBox<>();
+        mesbox = new javax.swing.JComboBox<>();
+        anobox = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        ValorTotalF = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        CombF = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        ValorLitroF = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        PostoF = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        diabox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Dia","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"}));
+        diabox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diaboxActionPerformed(evt);
+            }
+        });
+
+        mesbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Mes","janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"}));
+
+        anobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Ano","1900","1901","1902","1903","1904","1905","1906","1907","1908","1909","1910","1911","1912","1913","1914","1915","1916","1917","1918","1919","1920","1921","1922","1923","1924","1925","1926","1927","1928","1929","1930","1931","1932","1933","1934","1935","1936","1937","1938","1939","1940","1941","1942","1943","1944","1945","1946","1947","1948","1949","1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017"}));
+
+        jLabel1.setText("Data do abastecimento");
+
+        jLabel2.setText("Valor Total");
+
+        jLabel3.setText("R$");
+
+        jLabel4.setText("Tipo de Combustivel");
+
+        CombustivelDAO cdao = new CombustivelDAO();
+        ArrayList<String> lista = new ArrayList();
+        try {
+            lista = cdao.getAll();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar a base de combustiveis\n"+e);
+        }
+
+        String[] c = new String[lista.size()+1];
+        c[0] = "Selecione um Combustivel";
+        for (int i = 0; i < lista.size(); i++) {
+            c[i+1] = lista.get(i);
+        }
+        CombF.setModel(new javax.swing.DefaultComboBoxModel<>(c));
+
+        jLabel5.setText("Preço do Litro");
+
+        jLabel6.setText("R$");
+
+        jLabel7.setText("Posto");
+
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(diabox, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mesbox, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(anobox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(129, 129, 129)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CombF, 0, 243, Short.MAX_VALUE)
+                            .addComponent(ValorLitroF)
+                            .addComponent(ValorTotalF)
+                            .addComponent(PostoF))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(diabox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(CombF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(ValorLitroF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ValorTotalF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(PostoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void diaboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_diaboxActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Boolean Validador = true;
+        if (diabox.getSelectedIndex() == 0 || mesbox.getSelectedIndex() == 0
+                || anobox.getSelectedIndex() == 0) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Preencha uma data válida");
+        }
+
+        if (CombF.getSelectedIndex() == 0) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Selecione o Combustivel");
+        }
+
+        try {
+            if (Double.parseDouble(ValorLitroF.getText()) < 0) {
+                Validador = false;
+                JOptionPane.showMessageDialog(null, "Digite corretamente o valor "
+                        + "do Litro pago neste abastecimento");
+            }
+        } catch (Exception e) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Digite apenas valores "
+                    + "Numéricos no campo Valor do Litro");
+        }
+
+        try {
+            if (Double.parseDouble(ValorTotalF.getText()) < 0) {
+                Validador = false;
+                JOptionPane.showMessageDialog(null, "Digite corretamente o valor "
+                        + "Total gasto neste abastecimento");
+            }
+        } catch (Exception e) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Digite apenas valores "
+                    + "Numéricos no campo Valor Total");
+        }
+
+        if (PostoF.getText() == "" || PostoF.getText().equals(null)) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Preencha um Posto válido");
+        }
+
+        if (Validador) {
+
+            Abastecimento abastecimento = new Abastecimento();
+            AbastecimentoDAO dao = new AbastecimentoDAO();
+
+            String dd = diabox.getSelectedItem().toString();
+            String MM = mesbox.getSelectedItem().toString();
+            String yyyy = anobox.getSelectedItem().toString();
+
+            switch (MM) {
+                case "janeiro":
+                    MM = "01";
+                    break;
+                case "fevereiro":
+                    MM = "02";
+                    break;
+                case "março":
+                    MM = "03";
+                    break;
+                case "abril":
+                    MM = "05";
+                    break;
+                case "maio":
+                    MM = "06";
+                    break;
+                case "junho":
+                    MM = "06";
+                    break;
+                case "julho":
+                    MM = "07";
+                    break;
+                case "agosto":
+                    MM = "08";
+                    break;
+                case "setembro":
+                    MM = "09";
+                    break;
+                case "outubro":
+                    MM = "10";
+                    break;
+                case "novembro":
+                    MM = "11";
+                    break;
+                case "dezembro":
+                    MM = "12";
+                    break;
+            }
+            String dataAb = dd + "/" + MM + "/" + yyyy;
+            try {
+                abastecimento.setData(ManipuladorData.getDate(dataAb));
+            } catch (ParseException ex) {
+                Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao gravar a data\n" + ex);
+                return;
+            }
+
+            abastecimento.setPosto(PostoF.getText());
+
+            abastecimento.setTipoCombustivel(CombF.getSelectedItem().toString().charAt(0));
+            abastecimento.setUsuario(usuario.getIdUsuario());
+            abastecimento.setValorLitro(Double.parseDouble(ValorLitroF.getText()));
+            abastecimento.setValorTotal(Double.parseDouble(ValorTotalF.getText()));
+            abastecimento.setVeiculo(veiculo.getIdVeiculo());
+
+            int z = JOptionPane.showConfirmDialog(null, "Confirma este "
+                    + "abastecimento para o Veículo " + veiculo.toString() + " ?");
+            if (z == 0) {
+                try {
+                    dao.salvar(abastecimento);
+                    JOptionPane.showMessageDialog(null, "Abastecimento Registrado com sucesso.");
+                    dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Erro ao registrar Abastecimento\n" + ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Erro ao registrar Abastecimento\n" + ex);
+                }
+            } else if (z == 1) {
+                JOptionPane.showMessageDialog(null, "Ação cancelada.");
+                dispose();
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,5 +377,20 @@ public class NovoAbastecimento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CombF;
+    private javax.swing.JTextField PostoF;
+    private javax.swing.JTextField ValorLitroF;
+    private javax.swing.JTextField ValorTotalF;
+    private javax.swing.JComboBox<String> anobox;
+    private javax.swing.JComboBox<String> diabox;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JComboBox<String> mesbox;
     // End of variables declaration//GEN-END:variables
 }

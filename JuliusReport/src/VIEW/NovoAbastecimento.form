@@ -2,11 +2,11 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,13 +23,193 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="diabox" min="-2" pref="62" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="mesbox" min="-2" pref="88" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="anobox" min="-2" pref="68" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="CombF" pref="243" max="32767" attributes="0"/>
+                          <Component id="ValorLitroF" max="32767" attributes="0"/>
+                          <Component id="ValorTotalF" max="32767" attributes="0"/>
+                          <Component id="PostoF" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="diabox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="anobox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mesbox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CombF" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ValorLitroF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ValorTotalF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="PostoF" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JComboBox" name="diabox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;Dia&quot;,&quot;01&quot;,&quot;02&quot;,&quot;03&quot;,&quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;,&quot;13&quot;,&quot;14&quot;,&quot;15&quot;,&quot;16&quot;,&quot;17&quot;,&quot;18&quot;,&quot;19&quot;,&quot;20&quot;,&quot;21&quot;,&quot;22&quot;,&quot;23&quot;,&quot;24&quot;,&quot;25&quot;,&quot;26&quot;,&quot;27&quot;,&quot;28&quot;,&quot;29&quot;,&quot;30&quot;,&quot;31&quot;})" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="diaboxActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="mesbox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;Mes&quot;,&quot;janeiro&quot;,&quot;fevereiro&quot;,&quot;mar&#xe7;o&quot;,&quot;abril&quot;,&quot;maio&quot;,&quot;junho&quot;,&quot;julho&quot;,&quot;agosto&quot;,&quot;setembro&quot;,&quot;outubro&quot;,&quot;novembro&quot;,&quot;dezembro&quot;})" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="anobox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;Ano&quot;,&quot;1900&quot;,&quot;1901&quot;,&quot;1902&quot;,&quot;1903&quot;,&quot;1904&quot;,&quot;1905&quot;,&quot;1906&quot;,&quot;1907&quot;,&quot;1908&quot;,&quot;1909&quot;,&quot;1910&quot;,&quot;1911&quot;,&quot;1912&quot;,&quot;1913&quot;,&quot;1914&quot;,&quot;1915&quot;,&quot;1916&quot;,&quot;1917&quot;,&quot;1918&quot;,&quot;1919&quot;,&quot;1920&quot;,&quot;1921&quot;,&quot;1922&quot;,&quot;1923&quot;,&quot;1924&quot;,&quot;1925&quot;,&quot;1926&quot;,&quot;1927&quot;,&quot;1928&quot;,&quot;1929&quot;,&quot;1930&quot;,&quot;1931&quot;,&quot;1932&quot;,&quot;1933&quot;,&quot;1934&quot;,&quot;1935&quot;,&quot;1936&quot;,&quot;1937&quot;,&quot;1938&quot;,&quot;1939&quot;,&quot;1940&quot;,&quot;1941&quot;,&quot;1942&quot;,&quot;1943&quot;,&quot;1944&quot;,&quot;1945&quot;,&quot;1946&quot;,&quot;1947&quot;,&quot;1948&quot;,&quot;1949&quot;,&quot;1950&quot;,&quot;1951&quot;,&quot;1952&quot;,&quot;1953&quot;,&quot;1954&quot;,&quot;1955&quot;,&quot;1956&quot;,&quot;1957&quot;,&quot;1958&quot;,&quot;1959&quot;,&quot;1960&quot;,&quot;1961&quot;,&quot;1962&quot;,&quot;1963&quot;,&quot;1964&quot;,&quot;1965&quot;,&quot;1966&quot;,&quot;1967&quot;,&quot;1968&quot;,&quot;1969&quot;,&quot;1970&quot;,&quot;1971&quot;,&quot;1972&quot;,&quot;1973&quot;,&quot;1974&quot;,&quot;1975&quot;,&quot;1976&quot;,&quot;1977&quot;,&quot;1978&quot;,&quot;1979&quot;,&quot;1980&quot;,&quot;1981&quot;,&quot;1982&quot;,&quot;1983&quot;,&quot;1984&quot;,&quot;1985&quot;,&quot;1986&quot;,&quot;1987&quot;,&quot;1988&quot;,&quot;1989&quot;,&quot;1990&quot;,&quot;1991&quot;,&quot;1992&quot;,&quot;1993&quot;,&quot;1994&quot;,&quot;1995&quot;,&quot;1996&quot;,&quot;1997&quot;,&quot;1998&quot;,&quot;1999&quot;,&quot;2000&quot;,&quot;2001&quot;,&quot;2002&quot;,&quot;2003&quot;,&quot;2004&quot;,&quot;2005&quot;,&quot;2006&quot;,&quot;2007&quot;,&quot;2008&quot;,&quot;2009&quot;,&quot;2010&quot;,&quot;2011&quot;,&quot;2012&quot;,&quot;2013&quot;,&quot;2014&quot;,&quot;2015&quot;,&quot;2016&quot;,&quot;2017&quot;})" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data do abastecimento"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Valor Total"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ValorTotalF">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="R$"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo de Combustivel"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="CombF">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(c)" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="CombustivelDAO cdao = new CombustivelDAO();&#xa;ArrayList&lt;String&gt; lista = new ArrayList();&#xa;try {&#xa;    lista = cdao.getAll();&#xa;} catch (Exception e) {&#xa;    JOptionPane.showMessageDialog(null, &quot;Erro ao consultar a base de combustiveis\n&quot;+e);&#xa;}&#xa;&#xa;String[] c = new String[lista.size()+1];&#xa;c[0] = &quot;Selecione um Combustivel&quot;;&#xa;for (int i = 0; i &lt; lista.size(); i++) {&#xa;    c[i+1] = lista.get(i);&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o do Litro"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ValorLitroF">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="R$"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Posto"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="PostoF">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
 </Form>
