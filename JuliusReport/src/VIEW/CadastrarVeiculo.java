@@ -73,6 +73,7 @@ public class CadastrarVeiculo extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CADASTRO DE NOVOS VEÍCULOS");
 
         jLabel1.setText("Tipo");
 
