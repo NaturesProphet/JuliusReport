@@ -31,6 +31,7 @@ public class Veiculo {
     private String Cor;
     private String Placa;
     private int Usuario;
+    private String Anotacoes;
     private int IdVeiculo;
 
     public void setTipo(String t) {
@@ -87,6 +88,14 @@ public class Veiculo {
 
     public int getUsuario() {
         return this.Usuario;
+    }
+    
+    public void setAnotacoes(String a) {
+        this.Anotacoes = a;
+    }
+    
+    public String getAnotacoes() {
+        return this.Anotacoes;
     }
 
     public void setIdVeiculo(int i) {

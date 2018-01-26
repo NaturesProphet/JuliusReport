@@ -22,6 +22,7 @@ CREATE TABLE Veiculo (
 	Cor VARCHAR(20),
 	Placa VARCHAR(8) UNIQUE NOT NULL,
 	Usuario INT NOT NULL,
+        Anotacoes VARCHAR(255),
         CONSTRAINT FK_Veiculo_Usuario
         FOREIGN KEY (Usuario)
         REFERENCES Usuario (rowid)
