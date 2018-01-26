@@ -38,22 +38,17 @@ public class ConnectionFactory {
     public ConnectionFactory() throws IOException {
             patch = ler("BD.dat");
             url = "jdbc:sqlite:" + patch;
-            System.out.println("Patch: "+patch);
     }
-    
-    
 
-    
 
     public Connection getConnection() {
         try {
             System.out.println(url);
             Connection con = DriverManager.getConnection(url);
-            System.out.println("Conectado ao sqlite");
             return con;
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Nao conectou ao sqlite");
+            System.out.println("Nao conectou ao sqlite\n"+ex);
         }
         return null;
     }

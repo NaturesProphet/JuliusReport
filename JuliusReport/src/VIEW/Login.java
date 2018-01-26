@@ -18,6 +18,7 @@
  */
 package VIEW;
 
+import VIEW.Cadastros.NovoUsuario;
 import CONTROLE.DAO.UsuarioDAO;
 import ENTIDADES.Usuario;
 import java.awt.event.KeyEvent;

@@ -65,10 +65,12 @@ public class CombustivelDAO implements DAO{
         System.out.println("Método não implementado ainda..");
     }
     
+    
+    //retorna uma lista de strings simples contendo codigo e nome do combustivel
     public ArrayList<String> getAll() throws IOException, SQLException {
         ArrayList<String> lista = new ArrayList();
         Connection con = new ConnectionFactory().getConnection();
-        String sql = "SELECT rowid, Nome FROM Combustivel";
+        String sql = "SELECT rowid, Nome FROM Combustivel ORDER BY rowid";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
