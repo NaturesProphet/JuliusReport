@@ -11,8 +11,7 @@
 */
 CREATE TABLE Usuario (
     Login VARCHAR(40) UNIQUE NOT NULL,
-    Senha VARCHAR(255) NOT NULL,
-    PatchToBD VARCHAR(255)
+    Senha VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Veiculo (

@@ -100,6 +100,6 @@ public class Veiculo {
     @Override
     public String toString() {
         return this.getMarca() + " " + this.getModelo() + " " + this.getAno()
-                + this.getCor() + ", Placa " + this.getPlaca();
+                + " " + this.getCor() + ", Placa " + this.getPlaca();
     }
 }

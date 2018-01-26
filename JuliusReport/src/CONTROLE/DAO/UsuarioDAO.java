@@ -20,6 +20,7 @@ package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
 import ENTIDADES.Usuario;
+import ENTIDADES.Veiculo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,12 +38,11 @@ public class UsuarioDAO implements DAO {
     public void salvar(Object o) throws SQLException {
         if (o instanceof Usuario) {
             Usuario usuario = (Usuario) o;
-            String sql = "INSERT INTO Usuario VALUES (?,?,?)";
+            String sql = "INSERT INTO Usuario VALUES (?,?)";
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, usuario.getLogin());
             ps.setString(2, usuario.getSenha());
-            ps.setString(3, usuario.getPatchToBD());
             ps.execute();
             System.out.println("Usuario registrado.");
 
@@ -63,6 +63,7 @@ public class UsuarioDAO implements DAO {
 
     public Usuario getByLogin(String login) {
         String sql = "SELECT rowid, Login, Senha FROM Usuario WHERE Login = ?";
+
         try {
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -73,8 +74,32 @@ public class UsuarioDAO implements DAO {
                 usuario.setIdUsuario(rs.getInt(1));
                 usuario.setlogin(rs.getString(2));
                 usuario.setSenha(rs.getString(3));
-                usuario.setPatchToBD(rs.getString(4));
-                
+
+                //recuperando também os veiculos da frota do usuario
+                String sql2 = "SELECT rowid, * FROM Veiculo WHERE Usuario = ?";
+                try {
+                    Connection con2 = new ConnectionFactory().getConnection();
+                    PreparedStatement ps2 = con2.prepareStatement(sql2);
+                    ps2.setInt(1, usuario.getIdUsuario());
+                    ResultSet rs2 = ps2.executeQuery();
+                    while (rs2.next()) {
+                        Veiculo veiculo = new Veiculo();
+                        veiculo.setIdVeiculo(rs2.getInt(1));
+                        veiculo.setTipo(rs2.getString(2));
+                        veiculo.setMarca(rs2.getString(3));
+                        veiculo.setModelo(rs2.getString(4));
+                        veiculo.setAno(rs2.getInt(5));
+                        veiculo.setCor(rs2.getString(6));
+                        veiculo.setPlaca(rs2.getString(7));
+                        veiculo.setUsuario(rs2.getInt(8));
+
+                        usuario.addToFrota(veiculo);
+                        System.out.println("Veiculo gerado:\n"+veiculo.toString());
+                    }
+                } catch (SQLException e) {
+                    System.out.println("Erro ao tentar recuperar os carros da Frota\n"+e);
+                }
+
                 return usuario;
             }
 

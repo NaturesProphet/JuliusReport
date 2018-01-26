@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class Usuario {
     private String Login;
     private String Senha;
-    private String PatchToBD;
     private ArrayList<Veiculo> Frota;
     private int IdUsuario;
     
@@ -43,10 +42,6 @@ public class Usuario {
     
     public void setSenha(String s) {
         this.Senha = s;
-    }
-    
-    public void setPatchToBD(String p) {
-        this.PatchToBD = p;
     }
     
     public void setIdUsuario(int id) {
@@ -66,7 +61,15 @@ public class Usuario {
         return this.Senha;
     }
     
-    public String getPatchToBD() {
-        return this.PatchToBD;
+    public void addToFrota (Veiculo v) {
+        this.Frota.add(v);
+    }
+    
+    public int getFrotaSize() {
+        return Frota.size();
+    }
+    
+    public Veiculo getFromFrotaByPosition(int i) { 
+        return Frota.get(i);
     }
 }
