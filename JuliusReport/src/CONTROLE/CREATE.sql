@@ -49,6 +49,8 @@ CREATE TABLE Abastecimento (
 	TipoCombustivel INT,
 	ValorLitro FLOAT(2,2),
         Posto VARCHAR(30),
+        Usuario INT NOT NULL,
+        Veiculo INT NOT NULL,
 	CONSTRAINT FK_Abastecimento_Combustivel
 	FOREIGN KEY (TipoCombustivel)
 	REFERENCES Combustivel (rowid)

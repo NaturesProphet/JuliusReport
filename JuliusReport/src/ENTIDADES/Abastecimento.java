@@ -34,7 +34,26 @@ public class Abastecimento {
     int TipoCombustivel; //referencia Combustivel.IdCombustivel
     Double ValorLitro;
     String Posto;
+    int Veiculo;
+    int Usuario;
     int IdAbastecimento;
+    
+    public void setVeiculo(int v) {
+        this.Veiculo = v;
+    }
+    
+    public int getVeiculo() {
+        return this.Veiculo;
+    }
+    
+    public void setUsuario(int i) {
+        this.Usuario = i;
+    }
+    
+    public int getUsuario(){
+        return this.Usuario;
+    }
+    
     
     //recebe uma string dd/MM/yyyy como data e joga exceções pra cima
     public void setData(String d) throws ParseException{

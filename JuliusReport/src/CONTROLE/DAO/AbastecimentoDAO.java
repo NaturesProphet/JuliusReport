@@ -40,7 +40,7 @@ public class AbastecimentoDAO implements DAO {
             Abastecimento abastecimento = (Abastecimento) c;
             //formatador me ajudará a manipular as datas nos processos de I/O no DB
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-            String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?,?,?,?)";
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, formatador.format(abastecimento.getData())); //so proud to understand dat shit
@@ -48,6 +48,8 @@ public class AbastecimentoDAO implements DAO {
                 ps.setInt(3, abastecimento.getTipoCombustivel());
                 ps.setDouble(4, abastecimento.getValorLitro());
                 ps.setString(5, abastecimento.getPosto());
+                ps.setInt(6, abastecimento.getUsuario());
+                ps.setInt(7, abastecimento.getVeiculo());
                 ps.execute();
                 System.out.println("Abastecimento registrado.");
                 ps.close();
