@@ -49,6 +49,8 @@ public class VeiculoDAO implements DAO {
             
                 ps.execute();
                 System.out.println("Veiculo Registrado.");
+                ps.close();
+                con.close();
             
         }else {
             System.out.println("O objeto informado não é um Veículo");

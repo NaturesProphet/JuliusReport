@@ -43,6 +43,8 @@ public class TrajetoDAO implements DAO{
                 ps.setString(1, trajeto.getNome());
                 ps.execute();
                 System.out.println("Trajeto registrado.");
+                ps.close();
+                con.close();
         } else {
             System.out.println("O objeto informado não é um Trajeto");
         }

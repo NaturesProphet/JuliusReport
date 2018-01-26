@@ -47,6 +47,8 @@ public class ManutencaoDAO implements DAO {
                 ps.setString(5, manutencao.getServico());
                 ps.execute();
                 System.out.println("Manutencao registrada.");
+                ps.close();
+                con.close();
 
         } else {
             System.out.println("O objeto informado não é um Manutencao");

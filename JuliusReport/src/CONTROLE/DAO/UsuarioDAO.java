@@ -46,6 +46,8 @@ public class UsuarioDAO implements DAO {
             ps.setString(2, usuario.getSenha());
             ps.execute();
             System.out.println("Usuario registrado.");
+            ps.close();
+            con.close();
 
         } else {
             System.out.println("O objeto informado nao é um usuario.");
@@ -97,8 +99,14 @@ public class UsuarioDAO implements DAO {
                         usuario.addToFrota(veiculo);
                         System.out.println("Veiculo gerado:\n"+veiculo.toString());
                     }
+                    ps.close();
+                    ps2.close();
+                    con.close();
+                    con2.close();
                 } catch (SQLException e) {
                     System.out.println("Erro ao tentar recuperar os carros da Frota\n"+e);
+                    ps.close();
+                    con.close();
                 }
 
                 return usuario;

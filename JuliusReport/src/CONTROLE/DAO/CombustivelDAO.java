@@ -44,6 +44,8 @@ public class CombustivelDAO implements DAO{
                 ps.setString(1, combustivel.getNome());
                 ps.execute();
                 System.out.println("Abastecimento registrado.");
+                ps.close();
+                con.close();
             
             
         } else {

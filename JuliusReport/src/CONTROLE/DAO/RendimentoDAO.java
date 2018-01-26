@@ -46,6 +46,8 @@ public class RendimentoDAO implements DAO {
                 ps.setInt(4, rendimento.getAbastecimento());
                 ps.execute();
                 System.out.println("Rendimento Registrado.");
+                ps.close();
+                con.close();
 
         } else {
             System.out.println("O objeto informado não é da classe Rendimento");

@@ -49,6 +49,9 @@ public class AbastecimentoDAO implements DAO {
                 ps.setDouble(4, abastecimento.getValorLitro());
                 ps.setString(5, abastecimento.getPosto());
                 ps.execute();
+                System.out.println("Abastecimento registrado.");
+                ps.close();
+                con.close();
 
         } else {
             System.out.println("O objeto informado não é da classe Abastecimento");

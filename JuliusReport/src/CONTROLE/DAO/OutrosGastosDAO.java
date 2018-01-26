@@ -45,6 +45,8 @@ public class OutrosGastosDAO implements DAO {
                 ps.setString(3, outrosgastos.getDesc());
                 ps.execute();
                 System.out.println("Outros Gastos registrado.");
+                ps.close();
+                con.close();
 
         } else {
             System.out.println("O objeto informado não é um OutrosGastos");
