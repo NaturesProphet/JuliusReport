@@ -20,6 +20,7 @@ package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
 import ENTIDADES.Rendimento;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ import java.util.logging.Logger;
 public class RendimentoDAO implements DAO {
 
     @Override
-    public void salvar(Object o) throws SQLException{
+    public void salvar(Object o) throws SQLException, IOException{
         if (o instanceof Rendimento) {
             Rendimento rendimento = (Rendimento) o;
             String sql = "INSERT INTO Rendimento VALUES(?,?,?,?)";

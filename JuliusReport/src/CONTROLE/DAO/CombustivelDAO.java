@@ -21,6 +21,7 @@ package CONTROLE.DAO;
 import CONTROLE.ConnectionFactory;
 import CONTROLE.DAO.DAO;
 import ENTIDADES.Combustivel;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ import java.util.logging.Logger;
 public class CombustivelDAO implements DAO{
     
     @Override
-    public void salvar(Object o) throws SQLException{
+    public void salvar(Object o) throws SQLException, IOException{
         if (o instanceof Combustivel) {
             Combustivel combustivel = (Combustivel) o;
             String sql = "INSERT INTO Combustivel VALUES (?)";

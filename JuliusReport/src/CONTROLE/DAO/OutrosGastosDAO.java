@@ -20,6 +20,7 @@ package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
 import ENTIDADES.OutrosGastos;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ import java.util.logging.Logger;
 public class OutrosGastosDAO implements DAO {
 
     @Override
-    public void salvar(Object o) throws SQLException{
+    public void salvar(Object o) throws SQLException, IOException{
         if (o instanceof OutrosGastos) {
             OutrosGastos outrosgastos = (OutrosGastos) o;
             String sql = "INSERT INTO OutrosGastos VALUES (?,?,?)";

@@ -18,6 +18,8 @@
  */
 package CONTROLE;
 
+import static CONTROLE.ManipuladorArquivo.ler;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,13 +32,22 @@ import javax.swing.JOptionPane;
  * @author mgarcia
  */
 public class ConnectionFactory {
+    private String patch;
+    private String url = "jdbc:sqlite:" + patch;
 
-    private String patch = "/home/mgarcia/teste.db";
+    public ConnectionFactory() throws IOException {
+            patch = ler("BD.dat");
+            url = "jdbc:sqlite:" + patch;
+            System.out.println("Patch: "+patch);
+    }
     
-    private final String url = "jdbc:sqlite:"+ patch;
+    
+
+    
 
     public Connection getConnection() {
         try {
+            System.out.println(url);
             Connection con = DriverManager.getConnection(url);
             System.out.println("Conectado ao sqlite");
             return con;

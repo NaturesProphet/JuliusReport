@@ -21,6 +21,7 @@ package CONTROLE.DAO;
 import CONTROLE.ConnectionFactory;
 import ENTIDADES.Usuario;
 import ENTIDADES.Veiculo;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ import java.util.logging.Logger;
 public class UsuarioDAO implements DAO {
 
     @Override
-    public void salvar(Object o) throws SQLException {
+    public void salvar(Object o) throws SQLException, IOException {
         if (o instanceof Usuario) {
             Usuario usuario = (Usuario) o;
             String sql = "INSERT INTO Usuario VALUES (?,?)";
@@ -105,6 +106,8 @@ public class UsuarioDAO implements DAO {
 
         } catch (SQLException e) {
             System.out.println("Usuario nao foi encontrado");
+        } catch (IOException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

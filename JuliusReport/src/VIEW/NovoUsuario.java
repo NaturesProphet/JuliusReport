@@ -21,7 +21,10 @@ package VIEW;
 import CONTROLE.DAO.UsuarioDAO;
 import ENTIDADES.Usuario;
 import java.awt.HeadlessException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -130,6 +133,8 @@ public class NovoUsuario extends javax.swing.JFrame {
                         dispose();
                     } catch (HeadlessException | SQLException e) {
                         JOptionPane.showMessageDialog(null, "Um erro ocorreu ao tentar salvar o usuario\n"+e);
+                    } catch (IOException ex) {
+                        Logger.getLogger(NovoUsuario.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Os campos de senha nao podem estar vazios");

@@ -18,6 +18,7 @@
  */
 package CONTROLE.DAO;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -25,7 +26,7 @@ import java.sql.SQLException;
  * @author mgarcia
  */
 public interface DAO {
-    public void salvar(Object o) throws SQLException;
+    public void salvar(Object o) throws SQLException, IOException;
     public void atualizar(Object o);
     public void excluir(Object o);
 }

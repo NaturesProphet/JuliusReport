@@ -20,6 +20,7 @@ package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
 import ENTIDADES.Abastecimento;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ import java.util.logging.Logger;
 public class AbastecimentoDAO implements DAO {
 
     @Override
-    public void salvar(Object c) throws SQLException{
+    public void salvar(Object c) throws SQLException, IOException{
         if (c instanceof Abastecimento) {
             Abastecimento abastecimento = (Abastecimento) c;
             //formatador me ajudará a manipular as datas nos processos de I/O no DB

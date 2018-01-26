@@ -18,6 +18,14 @@
  */
 package VIEW;
 
+import CONTROLE.ManipuladorArquivo;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author mgarcia
@@ -29,6 +37,11 @@ public class Configuracoes extends javax.swing.JFrame {
      */
     public Configuracoes() {
         initComponents();
+        try {
+            patchTF.setText(ManipuladorArquivo.ler("BD.dat"));
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -41,7 +54,7 @@ public class Configuracoes extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        patchTF = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -50,9 +63,25 @@ public class Configuracoes extends javax.swing.JFrame {
 
         jLabel1.setText("caminho para o Banco de dados existente (extensão \".db\")");
 
+        patchTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patchTFActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Gerar Novo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("OK");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +99,7 @@ public class Configuracoes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
+                            .addComponent(patchTF)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -89,7 +118,7 @@ public class Configuracoes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(patchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -105,6 +134,28 @@ public class Configuracoes extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void patchTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patchTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patchTFActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JOptionPane.showMessageDialog(null,"Não implementado");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.showOpenDialog(patchTF);
+        File f = fc.getSelectedFile();
+        patchTF.setText( f.getPath() );
+        try {
+            ManipuladorArquivo.escrever("BD.dat", f.getPath());
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,6 +197,6 @@ public class Configuracoes extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField patchTF;
     // End of variables declaration//GEN-END:variables
 }

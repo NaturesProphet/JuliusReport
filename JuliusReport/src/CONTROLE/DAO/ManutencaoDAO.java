@@ -20,6 +20,7 @@ package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
 import ENTIDADES.Manutencao;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ import java.util.logging.Logger;
 public class ManutencaoDAO implements DAO {
 
     @Override
-    public void salvar(Object o) throws SQLException{
+    public void salvar(Object o) throws SQLException, IOException{
         if (o instanceof Manutencao) {
             Manutencao manutencao = (Manutencao) o;
             String sql = "INSERT INTO Manutencao VALUES (?,?,?,?,?)";
