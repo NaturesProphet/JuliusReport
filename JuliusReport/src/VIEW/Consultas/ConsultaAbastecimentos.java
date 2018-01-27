@@ -22,6 +22,7 @@ import CONTROLE.DAO.AbastecimentoDAO;
 import CONTROLE.DAO.CombustivelDAO;
 import ENTIDADES.Abastecimento;
 import ENTIDADES.Usuario;
+import ENTIDADES.Veiculo;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import javax.swing.JOptionPane;
 public class ConsultaAbastecimentos extends javax.swing.JFrame {
 
     Usuario usuario;
+    Veiculo veiculo;
     ArrayList<Abastecimento> lista;
     ArrayList<String> combustiveis;
 
@@ -60,14 +62,13 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
                     case 2:
                         int comb = ab.getTipoCombustivel();
                         comb--;
-
-                        matrix[i][y] = combustiveis.get(0);
+                        matrix[i][y] = combustiveis.get(comb);
                         break;
                     case 3:
-                        matrix[i][y] = ab.getValorLitro();
+                        matrix[i][y] = ab.getValorLitro().toString();
                         break;
                     case 4:
-                        matrix[i][y] = ab.getValorTotal();
+                        matrix[i][y] = ab.getValorTotal().toString();
                         break;
                     case 5:
                         matrix[i][y] = ab.getPosto();
@@ -76,7 +77,6 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
             }
 
         }
-
         return matrix;
     }
 
@@ -84,15 +84,16 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
         initComponents();
     }
 
-    public ConsultaAbastecimentos(Usuario u) {
+    public ConsultaAbastecimentos(Usuario u, Veiculo v) {
         usuario = u;
+        veiculo = v;
         lista = new ArrayList<Abastecimento>();
         combustiveis = new ArrayList<String>();
         AbastecimentoDAO dao = new AbastecimentoDAO();
         CombustivelDAO Cdao = new CombustivelDAO();
 
         try {
-            lista = dao.getAll(usuario.getIdUsuario());
+            lista = dao.getAll(usuario.getIdUsuario(), veiculo.getIdVeiculo());
             combustiveis = Cdao.getAll();
         } catch (IOException ex) {
             Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,7 +104,12 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao consultar o banco\n" + ex);
         }
         initComponents();
-
+        Double Total = 0.0;
+        for (int i = 0; i < lista.size(); i++) {
+            Total += lista.get(i).getValorTotal();
+        }
+        TotalLabel.setText("Total R$: "+Total);
+        VeiculoLabel.setText("Veículo pesquisado: " + veiculo.toString());
     }
 
     /**
@@ -119,6 +125,7 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         TotalLabel = new javax.swing.JLabel();
+        VeiculoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CONSULTA ABASTECIMENTOS");
@@ -135,20 +142,24 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
 
         TotalLabel.setText("Total R$: ");
 
+        VeiculoLabel.setText("Veiculo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VeiculoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(TotalLabel))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(TotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                .addComponent(VeiculoLabel))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,7 +169,7 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -213,6 +224,7 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TotalLabel;
+    private javax.swing.JLabel VeiculoLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -27,7 +27,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="622" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="945" max="32767" attributes="0"/>
                   <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -75,16 +75,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="TotalLabel" max="32767" attributes="0"/>
+                  <Component id="TotalLabel" min="-2" pref="181" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="VeiculoLabel" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
-                  <Component id="TotalLabel" min="-2" max="-2" attributes="0"/>
+              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                  <Component id="TotalLabel" alignment="3" pref="21" max="32767" attributes="0"/>
+                  <Component id="VeiculoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -93,6 +95,11 @@
         <Component class="javax.swing.JLabel" name="TotalLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Total R$: "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="VeiculoLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Veiculo"/>
           </Properties>
         </Component>
       </SubComponents>

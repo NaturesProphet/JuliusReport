@@ -75,12 +75,14 @@ public class AbastecimentoDAO implements DAO {
     }
 
     //retorna uma lista com todos os registros de Abastecimento
-    public ArrayList<Abastecimento> getAll(int IdUsuario) throws IOException, SQLException {
+    public ArrayList<Abastecimento> getAll(int IdUsuario, int IdVeiculo) throws IOException, SQLException {
         ArrayList<Abastecimento> lista = new ArrayList();
         Connection con = new ConnectionFactory().getConnection();
-        String sql = "SELECT rowid, * FROM Abastecimento WHERE Abastecimento.Usuario = ?";
+        String sql = "SELECT rowid, * FROM Abastecimento WHERE "
+                + "Abastecimento.Usuario = ? AND Veiculo = ?";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, IdUsuario);
+        ps.setInt(2, IdVeiculo);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             Abastecimento a = new Abastecimento();
