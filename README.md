@@ -13,7 +13,7 @@ O caminho para o arquivo do banco de dados (que consiste em um simples arquivo c
 
 ATENÇÃO: obviamente o sistema depende deste arquivo DB.dat em seu devido local apontando para seu respectivo arquivo .db (este pode estar em qualquer lugar com permissão de escrita que o Usuário quiser).
 
-Em caso do arquivo .db se corromper, existe um backup virgem deste arquivo contendo a estrutura de dados pronta para uso, basta portanto descompacta-lo e apontar o arquivo DB.dat para ele.
+Em caso do arquivo .db se corromper, existe um backup virgem deste arquivo compactado contendo a estrutura de dados pronta para uso, basta portanto descompacta-lo e apontar o arquivo DB.dat para ele. Este backup se encontra na pasta Raiz do sistema também, chamado 'Backup_JReport.db'.
 
 
 Este sistema foi desenvolvido totalmente em uma Plataforma Linux usando a IDE Netbeans, não testei em plataformas Windows ou mac, mas por ser Java e usar o SQLITE muito certamente que rodará tranquilamente nessas maquinas também.
