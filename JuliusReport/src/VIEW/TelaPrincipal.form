@@ -9,49 +9,58 @@
             <Property name="text" type="java.lang.String" value="Novo"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="Novo1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar novo Abastecimento"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Novo1ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="Novo2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar nova Manuten&#xe7;&#xe3;o"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="Novo3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar Novos Gastos"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="Novo4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar novo tipo de Trajeto"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+            <MenuItem class="javax.swing.JMenuItem" name="Novo5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar novo tipo de Combustivel"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem14">
+            <MenuItem class="javax.swing.JMenuItem" name="Novo6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Ve&#xed;culo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Novo6ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem17">
+            <MenuItem class="javax.swing.JMenuItem" name="Novo7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Posto de Combustivel"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem17ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Novo7ActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Novo8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar novo consumo calculado"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

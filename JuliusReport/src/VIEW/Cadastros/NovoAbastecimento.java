@@ -20,8 +20,10 @@ package VIEW.Cadastros;
 
 import CONTROLE.DAO.AbastecimentoDAO;
 import CONTROLE.DAO.CombustivelDAO;
+import CONTROLE.DAO.PostoDAO;
 import CONTROLE.ManipuladorData;
 import ENTIDADES.Abastecimento;
+import ENTIDADES.Posto;
 import ENTIDADES.Usuario;
 import ENTIDADES.Veiculo;
 import java.io.IOException;
@@ -77,8 +79,8 @@ public class NovoAbastecimento extends javax.swing.JFrame {
         ValorLitroF = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        PostoF = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        PostoF = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -139,6 +141,21 @@ public class NovoAbastecimento extends javax.swing.JFrame {
             }
         });
 
+        PostoDAO Pdao = new PostoDAO();
+        ArrayList<Posto> listaPostos = new ArrayList();
+        try {
+            listaPostos = Pdao.getAll();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar a base de Postos\n"+e);
+        }
+
+        String[] ArrayPostos = new String[listaPostos.size()+1];
+        ArrayPostos[0] = "Selecione um Posto";
+        for (int i = 0; i < listaPostos.size(); i++) {
+            ArrayPostos[i+1] = listaPostos.get(i).getNome();
+        }
+        PostoF.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayPostos));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +194,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                             .addComponent(CombF, 0, 243, Short.MAX_VALUE)
                             .addComponent(ValorLitroF)
                             .addComponent(ValorTotalF)
-                            .addComponent(PostoF))))
+                            .addComponent(PostoF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -213,7 +230,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                     .addComponent(PostoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -261,9 +278,9 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                     + "Numéricos no campo Valor Total");
         }
 
-        if (PostoF.getText() == "" || PostoF.getText().equals(null)) {
+        if (PostoF.getSelectedIndex() == 0) {
             Validador = false;
-            JOptionPane.showMessageDialog(null, "Preencha um Posto válido");
+            JOptionPane.showMessageDialog(null, "Escolha um Posto de Combustível");
         }
 
         if (Validador) {
@@ -322,7 +339,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                 return;
             }
 
-            abastecimento.setPosto(PostoF.getText());
+            abastecimento.setPosto(PostoF.getSelectedIndex());
 
             int tc = CombF.getSelectedIndex();
             
@@ -392,7 +409,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CombF;
-    private javax.swing.JTextField PostoF;
+    private javax.swing.JComboBox<String> PostoF;
     private javax.swing.JTextField ValorLitroF;
     private javax.swing.JTextField ValorTotalF;
     private javax.swing.JComboBox<String> anobox;

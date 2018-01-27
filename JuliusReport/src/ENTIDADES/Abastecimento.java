@@ -33,7 +33,7 @@ public class Abastecimento {
     Double ValorTotal;
     int TipoCombustivel; //referencia Combustivel.IdCombustivel
     Double ValorLitro;
-    String Posto;
+    int Posto;
     int Veiculo;
     int Usuario;
     int IdAbastecimento;
@@ -77,7 +77,7 @@ public class Abastecimento {
         this.ValorLitro = v;
     }
     
-    public void setPosto(String p) {
+    public void setPosto(int p) {
         this.Posto = p;
     }
     
@@ -107,7 +107,7 @@ public class Abastecimento {
         return this.ValorLitro;
     }
     
-    public String getPosto() {
+    public int getPosto() {
         return this.Posto;
     }
     

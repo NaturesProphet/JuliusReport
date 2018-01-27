@@ -51,7 +51,7 @@ public class AbastecimentoDAO implements DAO {
             ps.setDouble(2, abastecimento.getValorTotal());
             ps.setInt(3, abastecimento.getTipoCombustivel());
             ps.setDouble(4, abastecimento.getValorLitro());
-            ps.setString(5, abastecimento.getPosto());
+            ps.setInt(5, abastecimento.getPosto());
             ps.setInt(6, abastecimento.getUsuario());
             ps.setInt(7, abastecimento.getVeiculo());
             ps.execute();
@@ -96,7 +96,7 @@ public class AbastecimentoDAO implements DAO {
             a.setValorTotal(rs.getDouble(3));
             a.setTipoCombustivel(rs.getInt(4));
             a.setValorLitro(rs.getDouble(5));
-            a.setPosto(rs.getString(6));
+            a.setPosto(rs.getInt(6));
             a.setUsuario(rs.getInt(7));
             a.setVeiculo(rs.getInt(8));
 

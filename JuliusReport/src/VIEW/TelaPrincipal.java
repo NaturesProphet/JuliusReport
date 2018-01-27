@@ -18,12 +18,18 @@
  */
 package VIEW;
 
+import CONTROLE.VerificadorBD;
 import VIEW.Cadastros.CadastrarVeiculo;
 import VIEW.Cadastros.NovoAbastecimento;
 import ENTIDADES.Usuario;
 import ENTIDADES.Veiculo;
 import VIEW.Cadastros.CadastrarPosto;
 import VIEW.Consultas.ConsultaAbastecimentos;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +39,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     Usuario usuario;
     Veiculo veiculo;
+    Boolean Validador; //trava as janelas ate q o usuario cadastre um posto e um veiculo
 
     /**
      * Creates new form TelaPrincipal
@@ -43,7 +50,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public TelaPrincipal(Usuario u) {
         this.usuario = u;
+        try {
+            this.Validador = VerificadorBD.Verifica(u);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro de entrada e saida "
+                    + "ao verificar dados\n" + ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao verificar os dados\n" + ex);
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
+        if (Validador) {
+            Novo1.setEnabled(true);
+            Novo2.setEnabled(true);
+            Novo3.setEnabled(true);
+            Novo8.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Antes de usar algumas "
+                    + "funcionalidades, é necessário cadastrar ao menos 1 Veículo "
+                    + "e ao menos 1 Posto de Combustível.\nEstas opções "
+                    + "permanecerão trancadas até que você faça isso.");
+            JOptionPane.showMessageDialog(null, "Ao terminar de cadastrar o "
+                    + "primeiro veículo e o primeiro Posto, reinicie este "
+                    + "programa e as funcionalidades serão destrancadas.");
+        }
         if (u.getFrotaSize() > 0) {
             veiculo = u.getFromFrotaByPosition(0);
             LabelAtual.setText("Veiculo Atual: " + veiculo.getMarca()
@@ -67,13 +98,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         LabelAtual = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
+        Novo1 = new javax.swing.JMenuItem();
+        Novo2 = new javax.swing.JMenuItem();
+        Novo3 = new javax.swing.JMenuItem();
+        Novo4 = new javax.swing.JMenuItem();
+        Novo5 = new javax.swing.JMenuItem();
+        Novo6 = new javax.swing.JMenuItem();
+        Novo7 = new javax.swing.JMenuItem();
+        Novo8 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -140,41 +172,48 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Novo");
 
-        jMenuItem1.setText("Registrar novo Abastecimento");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        Novo1.setText("Registrar novo Abastecimento");
+        Novo1.setEnabled(false);
+        Novo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                Novo1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(Novo1);
 
-        jMenuItem2.setText("Registrar nova Manutenção");
-        jMenu1.add(jMenuItem2);
+        Novo2.setText("Registrar nova Manutenção");
+        Novo2.setEnabled(false);
+        jMenu1.add(Novo2);
 
-        jMenuItem3.setText("Registrar Novos Gastos");
-        jMenu1.add(jMenuItem3);
+        Novo3.setText("Registrar Novos Gastos");
+        Novo3.setEnabled(false);
+        jMenu1.add(Novo3);
 
-        jMenuItem4.setText("Cadastrar novo tipo de Trajeto");
-        jMenu1.add(jMenuItem4);
+        Novo4.setText("Cadastrar novo tipo de Trajeto");
+        jMenu1.add(Novo4);
 
-        jMenuItem5.setText("Cadastrar novo tipo de Combustivel");
-        jMenu1.add(jMenuItem5);
+        Novo5.setText("Cadastrar novo tipo de Combustivel");
+        jMenu1.add(Novo5);
 
-        jMenuItem14.setText("Cadastrar Veículo");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        Novo6.setText("Cadastrar Veículo");
+        Novo6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                Novo6ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem14);
+        jMenu1.add(Novo6);
 
-        jMenuItem17.setText("Cadastrar Posto de Combustivel");
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+        Novo7.setText("Cadastrar Posto de Combustivel");
+        Novo7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
+                Novo7ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem17);
+        jMenu1.add(Novo7);
+
+        Novo8.setText("Cadastrar novo consumo calculado");
+        Novo8.setEnabled(false);
+        jMenu1.add(Novo8);
 
         jMenuBar1.add(jMenu1);
 
@@ -254,9 +293,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new NovoAbastecimento(usuario,veiculo).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void Novo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo1ActionPerformed
+        new NovoAbastecimento(usuario, veiculo).setVisible(true);
+    }//GEN-LAST:event_Novo1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int id;
@@ -267,16 +306,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 + veiculo.getPlaca());
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void Novo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo6ActionPerformed
         new CadastrarVeiculo(usuario).setVisible(true);
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    }//GEN-LAST:event_Novo6ActionPerformed
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
 
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        new ConsultaAbastecimentos(usuario,veiculo).setVisible(true);
+        new ConsultaAbastecimentos(usuario, veiculo).setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
@@ -284,12 +323,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-       new Configuracoes().setVisible(true);
+        new Configuracoes().setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+    private void Novo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo7ActionPerformed
         new CadastrarPosto().setVisible(true);
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
+    }//GEN-LAST:event_Novo7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,25 +367,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelAtual;
+    private javax.swing.JMenuItem Novo1;
+    private javax.swing.JMenuItem Novo2;
+    private javax.swing.JMenuItem Novo3;
+    private javax.swing.JMenuItem Novo4;
+    private javax.swing.JMenuItem Novo5;
+    private javax.swing.JMenuItem Novo6;
+    private javax.swing.JMenuItem Novo7;
+    private javax.swing.JMenuItem Novo8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;

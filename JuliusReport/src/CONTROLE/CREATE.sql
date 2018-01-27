@@ -29,7 +29,7 @@ CREATE TABLE Veiculo (
 );
 
 CREATE TABLE Posto (
-    Nome VARCHAR(30) NOT NULL,
+    Nome VARCHAR(30) UNIQUE NOT NULL,
     Local VARCHAR(255)
 );
 
