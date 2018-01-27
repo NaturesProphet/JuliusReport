@@ -82,5 +82,24 @@ public class PostoDAO implements DAO {
         con.close();
         return lista;
     }
+    
+    public Posto getById(int id) throws IOException, SQLException {
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT rowid, Nome, Local FROM Posto WHERE rowid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        Posto posto = new Posto();
+        while (rs.next()) {
+            
+            posto.setIdPosto(rs.getInt(1));
+            posto.setNome(rs.getString(2));
+            posto.setLocal(rs.getString(3));
+        }
+        ps.close();
+        con.close();
+        return posto;
+    }
+    
 
 }

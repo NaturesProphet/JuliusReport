@@ -20,6 +20,7 @@ package VIEW.Consultas;
 
 import CONTROLE.DAO.AbastecimentoDAO;
 import CONTROLE.DAO.CombustivelDAO;
+import CONTROLE.DAO.PostoDAO;
 import ENTIDADES.Abastecimento;
 import ENTIDADES.Usuario;
 import ENTIDADES.Veiculo;
@@ -71,7 +72,16 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
                         matrix[i][y] = ab.getValorTotal().toString();
                         break;
                     case 5:
-                        matrix[i][y] = ab.getPosto();
+                        PostoDAO postodao = new PostoDAO();
+                {
+                    try {
+                        matrix[i][y] = postodao.getById(ab.getPosto()).getNome();
+                    } catch (IOException ex) {
+                        Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                         break;
                 }
             }
