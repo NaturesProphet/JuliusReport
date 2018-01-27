@@ -28,6 +28,10 @@ CREATE TABLE Veiculo (
         REFERENCES Usuario (rowid)
 );
 
+CREATE TABLE Posto (
+    Nome VARCHAR(30) NOT NULL,
+    Local VARCHAR(255)
+);
 
 CREATE TABLE Combustivel (
 	Nome VARCHAR(30) UNIQUE

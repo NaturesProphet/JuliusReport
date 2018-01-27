@@ -108,7 +108,7 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
         for (int i = 0; i < lista.size(); i++) {
             Total += lista.get(i).getValorTotal();
         }
-        TotalLabel.setText("Total R$: "+Total);
+        TotalLabel.setText("Total R$: "+ String.format("%.2f", Total));
         VeiculoLabel.setText("Veículo pesquisado: " + veiculo.toString());
     }
 
