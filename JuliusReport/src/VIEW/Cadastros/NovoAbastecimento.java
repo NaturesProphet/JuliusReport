@@ -324,7 +324,10 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
             abastecimento.setPosto(PostoF.getText());
 
-            abastecimento.setTipoCombustivel(CombF.getSelectedItem().toString().charAt(0));
+            int tc = CombF.getSelectedIndex();
+            
+            
+            abastecimento.setTipoCombustivel(tc);
             abastecimento.setUsuario(usuario.getIdUsuario());
             abastecimento.setValorLitro(Double.parseDouble(ValorLitroF.getText()));
             abastecimento.setValorTotal(Double.parseDouble(ValorTotalF.getText()));
