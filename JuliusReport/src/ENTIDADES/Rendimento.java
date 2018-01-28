@@ -25,7 +25,7 @@ package ENTIDADES;
 public class Rendimento {
     private Double KmL;
     private int Trajeto; //referencia Trajeto.IdTrajeto
-    private int ArCond; //inteiro representando o status do Ar Condicionado
+    private String ArCond; //situação média do ar condicionado
     private int IdRendimento;
     private int Abastecimento; //referencia Abastecimento.IdAbastecimento
     
@@ -35,7 +35,7 @@ public class Rendimento {
     public void setTrajeto(int t) {
         this.Trajeto = t;
     }
-    public void setArCond(int a) {
+    public void setArCond(String a) {
         this.ArCond = a;
     }
     public void setIdRendimento(int i) {
@@ -53,7 +53,7 @@ public class Rendimento {
     public int getTrajeto() {
         return this.Trajeto;
     }
-    public int getArCond() {
+    public String getArCond() {
         return this.ArCond;
     }
     public int getIdRendimento() {

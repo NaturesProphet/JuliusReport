@@ -63,7 +63,7 @@ CREATE TABLE Abastecimento (
 CREATE TABLE Rendimento (
 	KmL FLOAT (2,2),
 	Trajeto INT,
-	ArCond INT,
+	ArCond VARCHAR(30),
 	Abastecimento INT,
 	CONSTRAINT FK_Rendimento_Abastecimento
 	FOREIGN KEY (Abastecimento)

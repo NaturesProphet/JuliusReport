@@ -42,7 +42,7 @@ public class RendimentoDAO implements DAO {
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setDouble(1, rendimento.getKmL());
                 ps.setInt(2, rendimento.getTrajeto());
-                ps.setInt(3,rendimento.getArCond());
+                ps.setString(3,rendimento.getArCond());
                 ps.setInt(4, rendimento.getAbastecimento());
                 ps.execute();
                 System.out.println("Rendimento Registrado.");
