@@ -34,6 +34,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar novo tipo de Trajeto"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Novo4ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Novo5">
               <Properties>

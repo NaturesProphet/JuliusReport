@@ -18,7 +18,9 @@
  */
 package VIEW;
 
+import CONTROLE.DAO.TrajetoDAO;
 import CONTROLE.VerificadorBD;
+import ENTIDADES.Trajeto;
 import VIEW.Cadastros.CadastrarVeiculo;
 import VIEW.Cadastros.NovoAbastecimento;
 import ENTIDADES.Usuario;
@@ -190,6 +192,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.add(Novo3);
 
         Novo4.setText("Cadastrar novo tipo de Trajeto");
+        Novo4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Novo4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(Novo4);
 
         Novo5.setText("Cadastrar novo tipo de Combustivel");
@@ -329,6 +336,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void Novo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo7ActionPerformed
         new CadastrarPosto().setVisible(true);
     }//GEN-LAST:event_Novo7ActionPerformed
+
+    private void Novo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo4ActionPerformed
+        Trajeto trajeto = new Trajeto();
+        TrajetoDAO dao = new TrajetoDAO();
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome do novo trajeto");
+        if (!nome.isEmpty()) {
+            trajeto.setNome(nome);
+            try {
+                dao.salvar(trajeto);
+                JOptionPane.showMessageDialog(null, "Trajeto registrado.");
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao registrar trajeto\n" + ex);
+            } catch (IOException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro de entrada e saida "
+                        + "ao registrar trajeto\n" + ex);
+            }
+        }
+
+    }//GEN-LAST:event_Novo4ActionPerformed
 
     /**
      * @param args the command line arguments

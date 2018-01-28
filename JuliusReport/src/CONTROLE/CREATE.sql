@@ -94,10 +94,13 @@ INSERT INTO Combustivel VALUES
 
 
 INSERT INTO Trajeto VALUES
-('Cidade'),
+('Cidade - trafego moderado'),
+('Cidade - trafego mediano'),
+('Cidade - trafego intenso'),
 ('Trafego misto Cidade/Estrada'),
 ('Estrada - Montanhas'),
 ('Estrada - Planicies'),
-('Estrada - condições diversas');
+('Estrada - condições diversas'),
+('Estrada de chão/roça');
 
 .headers on
