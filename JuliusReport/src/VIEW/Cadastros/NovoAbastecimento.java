@@ -456,6 +456,9 @@ public class NovoAbastecimento extends javax.swing.JFrame {
             }
 
         }
+        if (radioNAO.isSelected()) {
+            ValidarRendimento = false;
+        }
 
         if (Validador) {
 
@@ -551,7 +554,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                     RendimentoDAO ReDAO = new RendimentoDAO();
                     try {
                         ReDAO.salvar(r);
-                        JOptionPane.showMessageDialog(null,"Rendimento registrado");
+                        JOptionPane.showMessageDialog(null, "Rendimento registrado");
                         dispose();
                     } catch (SQLException ex) {
                         Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
