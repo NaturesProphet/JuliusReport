@@ -533,6 +533,9 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                 try {
                     dao.salvar(abastecimento);
                     JOptionPane.showMessageDialog(null, "Abastecimento Registrado com sucesso.");
+                    if (ValidarRendimento == false) {
+                        dispose();
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "Erro ao registrar Abastecimento\n" + ex);
