@@ -103,4 +103,18 @@ INSERT INTO Trajeto VALUES
 ('Estrada - condições diversas'),
 ('Estrada de chão/roça');
 
+
+/*terei q fazer este registro para cada veículo registrado*/
+INSERT INTO Abastecimento VALUES (
+'00/00/0000',
+'0.00',
+'0.00',
+'0',
+'1',
+'0',
+);
+
+
+
+
 .headers on
