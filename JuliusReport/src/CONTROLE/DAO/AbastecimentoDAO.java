@@ -79,7 +79,7 @@ public class AbastecimentoDAO implements DAO {
         ArrayList<Abastecimento> lista = new ArrayList();
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT rowid, * FROM Abastecimento WHERE "
-                + "Abastecimento.Usuario = ? AND Veiculo = ?";
+                + "Abastecimento.Usuario = ? AND Veiculo = ? AND TipoCombustivel != 0";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, IdUsuario);
         ps.setInt(2, IdVeiculo);
