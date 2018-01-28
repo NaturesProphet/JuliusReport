@@ -18,8 +18,10 @@
  */
 package VIEW;
 
+import CONTROLE.DAO.CombustivelDAO;
 import CONTROLE.DAO.TrajetoDAO;
 import CONTROLE.VerificadorBD;
+import ENTIDADES.Combustivel;
 import ENTIDADES.Trajeto;
 import VIEW.Cadastros.CadastrarVeiculo;
 import VIEW.Cadastros.NovoAbastecimento;
@@ -67,7 +69,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Novo1.setEnabled(true);
             Novo2.setEnabled(true);
             Novo3.setEnabled(true);
-            Novo8.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Antes de usar algumas "
                     + "funcionalidades, é necessário cadastrar ao menos 1 Veículo "
@@ -107,7 +108,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Novo5 = new javax.swing.JMenuItem();
         Novo6 = new javax.swing.JMenuItem();
         Novo7 = new javax.swing.JMenuItem();
-        Novo8 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -200,6 +200,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.add(Novo4);
 
         Novo5.setText("Cadastrar novo tipo de Combustivel");
+        Novo5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Novo5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(Novo5);
 
         Novo6.setText("Cadastrar Veículo");
@@ -217,10 +222,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(Novo7);
-
-        Novo8.setText("Cadastrar novo consumo calculado");
-        Novo8.setEnabled(false);
-        jMenu1.add(Novo8);
 
         jMenuBar1.add(jMenu1);
 
@@ -358,6 +359,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Novo4ActionPerformed
 
+    private void Novo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo5ActionPerformed
+        Combustivel c = new Combustivel();
+        CombustivelDAO dao = new CombustivelDAO();
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome do novo Combustivel");
+        if (!nome.isEmpty()) {
+            c.setNome(nome);
+            try {
+                dao.salvar(c);
+                JOptionPane.showMessageDialog(null, "Combustivel registrado.");
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao registrar Combustivel\n" + ex);
+            } catch (IOException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro de entrada e saida "
+                        + "ao registrar Combustivel\n" + ex);
+            }
+        }
+        
+        
+    }//GEN-LAST:event_Novo5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -402,7 +425,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Novo5;
     private javax.swing.JMenuItem Novo6;
     private javax.swing.JMenuItem Novo7;
-    private javax.swing.JMenuItem Novo8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

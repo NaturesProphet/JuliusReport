@@ -42,6 +42,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar novo tipo de Combustivel"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Novo5ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Novo6">
               <Properties>
@@ -58,12 +61,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Novo7ActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="Novo8">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar novo consumo calculado"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
