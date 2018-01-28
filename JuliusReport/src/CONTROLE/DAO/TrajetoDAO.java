@@ -23,7 +23,9 @@ import ENTIDADES.Trajeto;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,6 +60,23 @@ public class TrajetoDAO implements DAO{
     @Override
     public void excluir(Object o) {
         System.out.println("Não implementado..");
+    }
+    
+    public ArrayList<Trajeto> getAll() throws IOException, SQLException {
+        ArrayList<Trajeto> lista = new ArrayList();
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT rowid, Nome FROM Trajeto ORDER BY rowid";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Trajeto trajeto = new Trajeto();
+            trajeto.setIdTrajeto(rs.getInt(1));
+            trajeto.setNome(rs.getString(2));
+            lista.add(trajeto);
+        }
+        ps.close();
+        con.close();
+        return lista;
     }
     
 }

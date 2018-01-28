@@ -44,7 +44,7 @@ public class AbastecimentoDAO implements DAO {
             Abastecimento abastecimento = (Abastecimento) c;
             //formatador me ajudará a manipular as datas nos processos de I/O no DB
             SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-            String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?,?,?,?,?)";
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, formatador.format(abastecimento.getData())); //so proud to understand dat shit
@@ -54,6 +54,7 @@ public class AbastecimentoDAO implements DAO {
             ps.setInt(5, abastecimento.getPosto());
             ps.setInt(6, abastecimento.getUsuario());
             ps.setInt(7, abastecimento.getVeiculo());
+            ps.setInt(8, abastecimento.getkm());
             ps.execute();
             System.out.println("Abastecimento registrado.");
             ps.close();
@@ -99,6 +100,7 @@ public class AbastecimentoDAO implements DAO {
             a.setPosto(rs.getInt(6));
             a.setUsuario(rs.getInt(7));
             a.setVeiculo(rs.getInt(8));
+            a.setkm(rs.getInt(9));
 
             lista.add(a);
 
@@ -110,4 +112,64 @@ public class AbastecimentoDAO implements DAO {
         return lista;
     }
 
+    //retorna o ultimo registro de abastecimento do carro informado
+    public Abastecimento getLast(int IdVeiculo) throws IOException, SQLException {
+        Abastecimento a = new Abastecimento();
+
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT rowid, * FROM ABASTECIMENTO WHERE rowid = "
+                + "(select MAX(rowid) FROM ABASTECIMENTO) AND Veiculo = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, IdVeiculo);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            a.setIdAbastecimento(rs.getInt(1));
+            try {
+                a.setData(rs.getString(2));
+            } catch (ParseException ex) {
+                Logger.getLogger(AbastecimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Erro ao converter String em Data\n" + ex);
+            }
+            a.setValorTotal(rs.getDouble(3));
+            a.setTipoCombustivel(rs.getInt(4));
+            a.setValorLitro(rs.getDouble(5));
+            a.setPosto(rs.getInt(6));
+            a.setUsuario(rs.getInt(7));
+            a.setVeiculo(rs.getInt(8));
+            a.setkm(rs.getInt(9));
+
+        }
+        return a;
+
+    }
+    
+    public Abastecimento getById(int IdAbastecimento) throws IOException, SQLException{
+        Abastecimento a = new Abastecimento();
+
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT rowid, * FROM ABASTECIMENTO WHERE rowid = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, IdAbastecimento);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            a.setIdAbastecimento(rs.getInt(1));
+            try {
+                a.setData(rs.getString(2));
+            } catch (ParseException ex) {
+                Logger.getLogger(AbastecimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Erro ao converter String em Data\n" + ex);
+            }
+            a.setValorTotal(rs.getDouble(3));
+            a.setTipoCombustivel(rs.getInt(4));
+            a.setValorLitro(rs.getDouble(5));
+            a.setPosto(rs.getInt(6));
+            a.setUsuario(rs.getInt(7));
+            a.setVeiculo(rs.getInt(8));
+            a.setkm(rs.getInt(9));
+
+        }
+        return a;
+    }
 }

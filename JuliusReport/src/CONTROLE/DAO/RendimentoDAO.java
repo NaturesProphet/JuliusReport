@@ -34,21 +34,28 @@ import java.util.logging.Logger;
 public class RendimentoDAO implements DAO {
 
     @Override
-    public void salvar(Object o) throws SQLException, IOException{
+    public void salvar(Object o) throws SQLException, IOException {
         if (o instanceof Rendimento) {
             Rendimento rendimento = (Rendimento) o;
-            String sql = "INSERT INTO Rendimento VALUES(?,?,?,?)";
+            AbastecimentoDAO abdao = new AbastecimentoDAO();
+
+            if (abdao.getById(rendimento.getAbastecimento()).getPosto() != 0) {
+
+                String sql = "INSERT INTO Rendimento VALUES(?,?,?,?)";
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setDouble(1, rendimento.getKmL());
                 ps.setInt(2, rendimento.getTrajeto());
-                ps.setString(3,rendimento.getArCond());
+                ps.setString(3, rendimento.getArCond());
                 ps.setInt(4, rendimento.getAbastecimento());
                 ps.execute();
                 System.out.println("Rendimento Registrado.");
                 ps.close();
                 con.close();
-
+            } else {
+                System.out.println("O abastecimento informado é o ponto zero.\n"
+                        + "Abastecimento não registrado.");
+            }
         } else {
             System.out.println("O objeto informado não é da classe Rendimento");
         }

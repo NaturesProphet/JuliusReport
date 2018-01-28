@@ -21,9 +21,13 @@ package VIEW.Cadastros;
 import CONTROLE.DAO.AbastecimentoDAO;
 import CONTROLE.DAO.CombustivelDAO;
 import CONTROLE.DAO.PostoDAO;
+import CONTROLE.DAO.RendimentoDAO;
+import CONTROLE.DAO.TrajetoDAO;
 import CONTROLE.ManipuladorData;
 import ENTIDADES.Abastecimento;
 import ENTIDADES.Posto;
+import ENTIDADES.Rendimento;
+import ENTIDADES.Trajeto;
 import ENTIDADES.Usuario;
 import ENTIDADES.Veiculo;
 import java.io.IOException;
@@ -43,6 +47,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
     Usuario usuario;
     Veiculo veiculo;
+    Abastecimento UltimoAbastecimento;
 
     /**
      * Creates new form NovoAbastecimento
@@ -51,6 +56,18 @@ public class NovoAbastecimento extends javax.swing.JFrame {
         initComponents();
         usuario = u;
         veiculo = v;
+        AbastecimentoDAO abastecimentodao = new AbastecimentoDAO();
+        try {
+            UltimoAbastecimento = abastecimentodao.getLast(v.getIdVeiculo());
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de entrada e saída "
+                    + "ao buscar na base de Abastecimento\n" + ex);
+            Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar na base de "
+                    + "Abastecimento\n" + ex);
+            Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public NovoAbastecimento() {
@@ -81,6 +98,18 @@ public class NovoAbastecimento extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         PostoF = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        ArCondF = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        TrajetoF = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        radioSIM = new javax.swing.JRadioButton();
+        radioNAO = new javax.swing.JRadioButton();
+        jLabel12 = new javax.swing.JLabel();
+        KmF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Abastecimento");
@@ -157,50 +186,153 @@ public class NovoAbastecimento extends javax.swing.JFrame {
         }
         PostoF.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayPostos));
 
+        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+
+        ArCondF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o status do Ar.","Desligado sempre", "Ligado sempre", "Uso moderado/econômico"}));
+
+        jLabel8.setText("Considerando a situação em que você rodou com este veículo");
+
+        jLabel9.setText("1 - Como foi o uso do Ar Condicionado ?");
+
+        jLabel10.setText("desde a ultima vez em que o abasteceu, responda:");
+
+        jLabel11.setText("2 - Qual tipo de trajeto o veículo percorreu?");
+
+        TrajetoDAO Tdao = new TrajetoDAO();
+        ArrayList<Trajeto> listaTrajeto = new ArrayList();
+        try {
+            listaTrajeto = Tdao.getAll();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar a base de Trajetos\n"+e);
+        }
+
+        String[] ArrayTrajeto = new String[listaTrajeto.size()+1];
+        ArrayTrajeto[0] = "Selecione um tipo de trajeto";
+        for (int i = 0; i < listaTrajeto.size(); i++) {
+            ArrayTrajeto[i+1] = listaTrajeto.get(i).getNome();
+        }
+        TrajetoF.setModel(new javax.swing.DefaultComboBoxModel<>(ArrayTrajeto));
+
+        jLabel13.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        jLabel13.setText("Deseja registrar este consumo na base de dados ?");
+
+        radioSIM.setText("Sim! Registre! :)");
+        radioSIM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioSIMActionPerformed(evt);
+            }
+        });
+
+        radioNAO.setText("Não. eu não pude completar o tanque :(");
+        radioNAO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioNAOActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(radioSIM)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(radioNAO)
+                                .addGap(30, 30, 30))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(TrajetoF, javax.swing.GroupLayout.Alignment.LEADING, 0, 420, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel11))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ArCondF, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ArCondF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TrajetoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioSIM)
+                    .addComponent(radioNAO))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel12.setText("Quilometragem atual");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(diabox, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(mesbox, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(anobox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                            .addComponent(jLabel6)))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel4))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(diabox, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(mesbox, 0, 103, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(anobox, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                        .addGap(19, 19, 19)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(KmF)
+                                            .addComponent(PostoF, 0, 258, Short.MAX_VALUE)
+                                            .addComponent(ValorTotalF)
+                                            .addComponent(ValorLitroF)
+                                            .addComponent(CombF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(129, 129, 129)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CombF, 0, 243, Short.MAX_VALUE)
-                            .addComponent(ValorLitroF)
-                            .addComponent(ValorTotalF)
-                            .addComponent(PostoF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap()
+                                .addComponent(jLabel12)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,9 +361,15 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(PostoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(KmF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -244,6 +382,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Boolean Validador = true;
+        Boolean ValidarRendimento = true;
         if (diabox.getSelectedIndex() == 0 || mesbox.getSelectedIndex() == 0
                 || anobox.getSelectedIndex() == 0) {
             Validador = false;
@@ -282,6 +421,40 @@ public class NovoAbastecimento extends javax.swing.JFrame {
         if (PostoF.getSelectedIndex() == 0) {
             Validador = false;
             JOptionPane.showMessageDialog(null, "Escolha um Posto de Combustível");
+        }
+
+        try {
+            if (Integer.parseInt(KmF.getText()) < 0) {
+                Validador = false;
+                JOptionPane.showMessageDialog(null, "Digite corretamente o valor "
+                        + "da Quilometragem atual do veículo");
+            }
+        } catch (Exception e) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Digite apenas valores "
+                    + "Numéricos no campo Quilometragem atual");
+        }
+
+        if (!radioSIM.isSelected() && !radioNAO.isSelected()) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Marque uma das opções abaixo para"
+                    + "definir se os dados de consumo \ne rendimento serão gerados"
+                    + "e armazenados na base de dados.");
+        }
+
+        if (radioSIM.isSelected()) {
+            if (ArCondF.getSelectedIndex() == 0) {
+                Validador = false;
+                ValidarRendimento = false;
+                JOptionPane.showMessageDialog(null, "Selecione o status "
+                        + "do Ar Condicionado");
+            }
+            if (TrajetoF.getSelectedIndex() == 0) {
+                Validador = false;
+                ValidarRendimento = false;
+                JOptionPane.showMessageDialog(null, "Selecione um tipo de trajeto");
+            }
+
         }
 
         if (Validador) {
@@ -343,13 +516,13 @@ public class NovoAbastecimento extends javax.swing.JFrame {
             abastecimento.setPosto(PostoF.getSelectedIndex());
 
             int tc = CombF.getSelectedIndex();
-            
-            
+
             abastecimento.setTipoCombustivel(tc);
             abastecimento.setUsuario(usuario.getIdUsuario());
             abastecimento.setValorLitro(Double.parseDouble(ValorLitroF.getText()));
             abastecimento.setValorTotal(Double.parseDouble(ValorTotalF.getText()));
             abastecimento.setVeiculo(veiculo.getIdVeiculo());
+            abastecimento.setkm(Integer.parseInt(KmF.getText()));
 
             int z = JOptionPane.showConfirmDialog(null, "Confirma este "
                     + "abastecimento para o Veículo " + veiculo.toString() + " ?");
@@ -357,7 +530,6 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                 try {
                     dao.salvar(abastecimento);
                     JOptionPane.showMessageDialog(null, "Abastecimento Registrado com sucesso.");
-                    dispose();
                 } catch (SQLException ex) {
                     Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "Erro ao registrar Abastecimento\n" + ex);
@@ -365,6 +537,32 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                     Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "Erro ao registrar Abastecimento\n" + ex);
                 }
+
+                if (ValidarRendimento) {
+                    Rendimento r = new Rendimento();
+                    r.SetAbastecimento(UltimoAbastecimento.getIdAbastecimento());
+                    r.setArCond(ArCondF.getSelectedItem().toString());
+                    r.setTrajeto(TrajetoF.getSelectedIndex());
+                    int kmrodados = Integer.parseInt(KmF.getText()) - UltimoAbastecimento.getkm();
+                    Double Litros = Double.parseDouble(ValorTotalF.getText());
+                    Litros /= Double.parseDouble(ValorLitroF.getText());
+                    Double kmmedia = kmrodados / Litros;
+                    r.setKmL(kmmedia);
+                    RendimentoDAO ReDAO = new RendimentoDAO();
+                    try {
+                        ReDAO.salvar(r);
+                        JOptionPane.showMessageDialog(null,"Rendimento registrado");
+                        dispose();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, "Erro ao salvar o rendimento\n" + ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, "Erro de entrada e saida "
+                                + "ao salvar o rendimento\n" + ex);
+                    }
+                }
+
             } else if (z == 1) {
                 JOptionPane.showMessageDialog(null, "Ação cancelada.");
                 dispose();
@@ -372,6 +570,18 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void radioSIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioSIMActionPerformed
+        if (radioSIM.isSelected()) {
+            radioNAO.setSelected(false);
+        }
+    }//GEN-LAST:event_radioSIMActionPerformed
+
+    private void radioNAOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioNAOActionPerformed
+        if (radioNAO.isSelected()) {
+            radioSIM.setSelected(false);
+        }
+    }//GEN-LAST:event_radioNAOActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,20 +619,32 @@ public class NovoAbastecimento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ArCondF;
     private javax.swing.JComboBox<String> CombF;
+    private javax.swing.JTextField KmF;
     private javax.swing.JComboBox<String> PostoF;
+    private javax.swing.JComboBox<String> TrajetoF;
     private javax.swing.JTextField ValorLitroF;
     private javax.swing.JTextField ValorTotalF;
     private javax.swing.JComboBox<String> anobox;
     private javax.swing.JComboBox<String> diabox;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> mesbox;
+    private javax.swing.JRadioButton radioNAO;
+    private javax.swing.JRadioButton radioSIM;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,6 +36,7 @@ public class Abastecimento {
     int Posto;
     int Veiculo;
     int Usuario;
+    int km;
     int IdAbastecimento;
     
     public void setVeiculo(int v) {
@@ -113,5 +114,13 @@ public class Abastecimento {
     
     public int getIdAbastecimento() {
         return this.IdAbastecimento;
+    }
+    
+    public void setkm(int k) {
+        this.km = k;
+    }
+    
+    public int getkm() {
+        return this.km;
     }
 }

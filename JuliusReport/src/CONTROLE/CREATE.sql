@@ -55,6 +55,7 @@ CREATE TABLE Abastecimento (
         Posto VARCHAR(30),
         Usuario INT NOT NULL,
         Veiculo INT NOT NULL,
+        km INT,
 	CONSTRAINT FK_Abastecimento_Combustivel
 	FOREIGN KEY (TipoCombustivel)
 	REFERENCES Combustivel (rowid)
@@ -103,18 +104,3 @@ INSERT INTO Trajeto VALUES
 ('Estrada - condições diversas'),
 ('Estrada de chão/roça');
 
-
-/*terei q fazer este registro para cada veículo registrado*/
-INSERT INTO Abastecimento VALUES (
-'00/00/0000',
-'0.00',
-'0.00',
-'0',
-'1',
-'0',
-);
-
-
-
-
-.headers on
