@@ -31,6 +31,7 @@ import VIEW.Cadastros.CadastrarPosto;
 import VIEW.Cadastros.NovaManutencao;
 import VIEW.Cadastros.RegistrarOutrosGastos;
 import VIEW.Consultas.ConsultaAbastecimentos;
+import VIEW.Consultas.ConsultaManutencao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -248,6 +249,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setText("Consultar historico de Manutenção");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setText("Consultar histórico de outros gastos ");
@@ -400,6 +406,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void Novo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo3ActionPerformed
         new RegistrarOutrosGastos(this.veiculo).setVisible(true);
     }//GEN-LAST:event_Novo3ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        new ConsultaManutencao(veiculo).setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
