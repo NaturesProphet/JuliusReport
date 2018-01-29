@@ -434,9 +434,9 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
         if (!radioSIM.isSelected() && !radioNAO.isSelected()) {
             Validador = false;
-            JOptionPane.showMessageDialog(null, "Marque uma das opções abaixo para"
+            JOptionPane.showMessageDialog(null, "Marque uma das opções abaixo para "
                     + "definir se os dados de consumo \ne rendimento serão gerados"
-                    + "e armazenados na base de dados.");
+                    + " e armazenados na base de dados.");
         }
 
         if (radioSIM.isSelected()) {
