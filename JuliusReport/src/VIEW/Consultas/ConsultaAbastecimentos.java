@@ -66,10 +66,10 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
                         matrix[i][y] = combustiveis.get(comb);
                         break;
                     case 3:
-                        matrix[i][y] = ab.getValorLitro().toString();
+                        matrix[i][y] = String.format("%.2f", ab.getValorLitro());
                         break;
                     case 4:
-                        matrix[i][y] = ab.getValorTotal().toString();
+                        matrix[i][y] = String.format("%.2f", ab.getValorTotal());
                         break;
                     case 5:
                         PostoDAO postodao = new PostoDAO();

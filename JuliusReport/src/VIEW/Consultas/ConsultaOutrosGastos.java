@@ -18,8 +18,8 @@
  */
 package VIEW.Consultas;
 
-import CONTROLE.DAO.ManutencaoDAO;
-import ENTIDADES.Manutencao;
+import CONTROLE.DAO.OutrosGastosDAO;
+import ENTIDADES.OutrosGastos;
 import ENTIDADES.Veiculo;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,74 +33,69 @@ import javax.swing.JOptionPane;
  *
  * @author mgarcia
  */
-public class ConsultaManutencao extends javax.swing.JFrame {
+public class ConsultaOutrosGastos extends javax.swing.JFrame {
 
+    ArrayList<OutrosGastos> lista;
+    OutrosGastosDAO dao;
     Veiculo veiculo;
-    ManutencaoDAO dao;
-    Double total;
-    ArrayList<Manutencao> lista;
-
     /**
-     * Creates new form ConsultaManutencao
+     * Creates new form ConsultaOutrosGastos
      */
-    public ConsultaManutencao() {
+    public ConsultaOutrosGastos() {
         initComponents();
     }
-
-    public ConsultaManutencao(Veiculo v) {
+    
+    public ConsultaOutrosGastos(Veiculo v) {
         this.veiculo = v;
-        dao = new ManutencaoDAO();
+        dao = new OutrosGastosDAO();
         try {
             lista = dao.getAll(v.getIdVeiculo());
         } catch (IOException ex) {
-            Logger.getLogger(ConsultaManutencao.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro de entrada e saída\n" + ex);
+            Logger.getLogger(ConsultaOutrosGastos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro de Entrada e saida ao listar registros\n"+ex);
             dispose();
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaManutencao.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao recuperar dados do banco\n" + ex);
+            Logger.getLogger(ConsultaOutrosGastos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao consultar base de dados\n"+ex);
             dispose();
         } catch (ParseException ex) {
-            Logger.getLogger(ConsultaManutencao.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro de conversão numérica\n" + ex);
+            Logger.getLogger(ConsultaOutrosGastos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro de conversão numérica\n"+ex);
             dispose();
         }
+
         initComponents();
-        total = 0.0;
-        Double Pecas = 0.0;
-        Double Serv = 0.0;
+        Double total = 0.0;
         for (int i = 0; i < lista.size(); i++) {
-            total += lista.get(i).getValorServ() + lista.get(i).getValorPecas();
-            Pecas += lista.get(i).getValorPecas();
-            Serv += lista.get(i).getValorServ();
+            total += lista.get(i).getValor();
         }
         TotalLabel.setText("Total R$: " + String.format("%.2f", total));
         VLabel.setText("Veículo pesquisado: " + veiculo.toString());
-        ServLabel.setText("Mão de obra R$: " + String.format("%.2f", Serv));
-        PecaLabel.setText("Peças R$: " + String.format("%.2f", Pecas));
     }
 
+    
+    ////////
     //este metodo gerará a matriz de dados que alimentarão a tabela
     public Object[][] getArray() {
         int length = lista.size();
         Object[][] matrix = new String[length][4];
 
         for (int i = 0; i < length; i++) {
-            Manutencao man = lista.get(i);
+            OutrosGastos og = lista.get(i);
             for (int y = 0; y < 4; y++) {
                 switch (y) {
                     case 0:
-                        matrix[i][y] = "" + man.getIdManutencao();
+                        matrix[i][y] = "" + og.getIdOutrosGastos();
                         break;
                     case 1:
-                        matrix[i][y] = man.getDataAsString();
+                        matrix[i][y] = og.getDataAsString();
                         break;
                     case 2:
-                        Double vtotal = man.getValorPecas() + man.getValorServ();
+                        Double vtotal = og.getValor();
                         matrix[i][y] = String.format("%.2f", vtotal);
                         break;
                     case 3:
-                        matrix[i][y] = man.getServico();
+                        matrix[i][y] = og.getDesc();
                         break;
                 }
             }
@@ -108,6 +103,9 @@ public class ConsultaManutencao extends javax.swing.JFrame {
         }
         return matrix;
     }
+    
+    
+    //////////
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,80 +116,90 @@ public class ConsultaManutencao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         TotalLabel = new javax.swing.JLabel();
         VLabel = new javax.swing.JLabel();
-        ServLabel = new javax.swing.JLabel();
-        PecaLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CONSULTA MANUTENÇÃO");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            getArray(),
-            new String [] {
-                "ID", "Data", "Somatório dos custos", "Serviço executado"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        setTitle("CONSULTA DESPESAS");
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        TotalLabel.setText("Valor Total:");
+        TotalLabel.setText("Valor Total: R$ ");
 
-        VLabel.setText("Veículo pesquisado:");
-
-        ServLabel.setText("ValorServ");
-
-        PecaLabel.setText("ValorPeça");
+        VLabel.setText("Veículo Pesquisado: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(TotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ServLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PecaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(VLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(TotalLabel)
+                .addGap(100, 100, 100)
+                .addComponent(VLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TotalLabel)
-                    .addComponent(VLabel)
-                    .addComponent(ServLabel)
-                    .addComponent(PecaLabel))
+                    .addComponent(VLabel))
                 .addContainerGap())
         );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            getArray(),
+            new String [] {
+                "ID", "Data", "Valor", "Descrição"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(30);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(60);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(130);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -215,27 +223,25 @@ public class ConsultaManutencao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaManutencao().setVisible(true);
+                new ConsultaOutrosGastos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel PecaLabel;
-    private javax.swing.JLabel ServLabel;
     private javax.swing.JLabel TotalLabel;
     private javax.swing.JLabel VLabel;
     private javax.swing.JPanel jPanel1;

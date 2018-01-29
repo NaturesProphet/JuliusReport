@@ -44,7 +44,8 @@ CREATE TABLE Trajeto (
 CREATE TABLE OutrosGastos (
 	Data DATETIME,
 	Valor FLOAT(5,2),
-	Desc VARCHAR(255)
+	Desc VARCHAR(255),
+	Veiculo INT
 );
 
 CREATE TABLE Abastecimento (
