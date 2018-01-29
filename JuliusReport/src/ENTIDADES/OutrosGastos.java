@@ -36,7 +36,7 @@ public class OutrosGastos {
     private int IdOutrosGastos;
 
     public void setData(String d) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         this.Data = df.parse(d);
     }
 

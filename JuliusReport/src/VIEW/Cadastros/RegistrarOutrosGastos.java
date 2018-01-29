@@ -18,8 +18,8 @@
  */
 package VIEW.Cadastros;
 
-import CONTROLE.DAO.ManutencaoDAO;
-import ENTIDADES.Manutencao;
+import CONTROLE.DAO.OutrosGastosDAO;
+import ENTIDADES.OutrosGastos;
 import ENTIDADES.Veiculo;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,19 +33,19 @@ import javax.swing.JOptionPane;
  *
  * @author mgarcia
  */
-public class NovaManutencao extends javax.swing.JFrame {
+public class RegistrarOutrosGastos extends javax.swing.JFrame {
 
     Veiculo veiculo;
 
     /**
-     * Creates new form NovaManutencao
+     * Creates new form RegistrarOutrosGastos
      */
-    public NovaManutencao(Veiculo v) {
-        this.veiculo = v;
+    public RegistrarOutrosGastos() {
         initComponents();
     }
 
-    public NovaManutencao() {
+    public RegistrarOutrosGastos(Veiculo v) {
+        this.veiculo = v;
         initComponents();
     }
 
@@ -63,18 +63,14 @@ public class NovaManutencao extends javax.swing.JFrame {
         anobox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        kmF = new javax.swing.JTextField();
+        ValorF = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        ValorPecasF = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        ValorServF = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ServF = new javax.swing.JTextArea();
+        DescF = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Registrar Manutenção");
+        setTitle("Registro de Despesas");
 
         diabox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Dia","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"}));
         diabox.addActionListener(new java.awt.event.ActionListener() {
@@ -97,19 +93,15 @@ public class NovaManutencao extends javax.swing.JFrame {
         }
         anobox.setModel(new javax.swing.DefaultComboBoxModel<>(anos));
 
-        jLabel1.setText("Data da Manutenção");
+        jLabel1.setText("Data de registro");
 
-        jLabel2.setText("Quilometragem");
+        jLabel2.setText("Valor");
 
-        jLabel3.setText("Despesa com Peças");
+        jLabel3.setText("Descrição");
 
-        jLabel4.setText("Despesa com Serviço");
-
-        jLabel5.setText("Descrição do Serviço");
-
-        ServF.setColumns(20);
-        ServF.setRows(5);
-        jScrollPane1.setViewportView(ServF);
+        DescF.setColumns(20);
+        DescF.setRows(5);
+        jScrollPane1.setViewportView(DescF);
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -125,32 +117,26 @@ public class NovaManutencao extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(diabox, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(mesbox, 0, 94, Short.MAX_VALUE)
+                                .addComponent(mesbox, 0, 111, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(anobox, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(kmF)
-                            .addComponent(ValorPecasF)))
-                    .addComponent(jScrollPane1)
+                            .addComponent(ValorF)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(16, 16, 16)
-                        .addComponent(ValorServF)))
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -165,19 +151,11 @@ public class NovaManutencao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(kmF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ValorF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(ValorPecasF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(ValorServF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -192,77 +170,39 @@ public class NovaManutencao extends javax.swing.JFrame {
     }//GEN-LAST:event_diaboxActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean validador = true;
-
+        Boolean Validador = true;
+        Boolean ValidarRendimento = true;
         if (diabox.getSelectedIndex() == 0 || mesbox.getSelectedIndex() == 0
                 || anobox.getSelectedIndex() == 0) {
-            validador = false;
+            Validador = false;
             JOptionPane.showMessageDialog(null, "Preencha uma data válida");
         }
+        ////
 
-        if (kmF.getText().isEmpty()) {
-            validador = false;
-            JOptionPane.showMessageDialog(null, "Preencha um valor para quilometragem");
+        if (ValorF.getText().isEmpty()) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Preencha um valor");
         }
 
         try {
-            if (Integer.parseInt(kmF.getText()) < 0) {
-                validador = false;
-                JOptionPane.showMessageDialog(null, "valor inválido em quilometragem");
+            if (Double.parseDouble(ValorF.getText()) < 0) {
+                Validador = false;
+                JOptionPane.showMessageDialog(null, "valor inválido");
             }
         } catch (Exception e) {
-            validador = false;
-            JOptionPane.showMessageDialog(null, "Digite apenas numeros inteiros "
-                    + "no campo quilometragem");
-        }
-        //////////
-        if (ValorPecasF.getText().isEmpty()) {
-            validador = false;
-            JOptionPane.showMessageDialog(null, "Preencha um valor para "
-                    + "Despesa com Peças");
-        }
-
-        try {
-            if (Double.parseDouble(ValorPecasF.getText()) < 0) {
-                validador = false;
-                JOptionPane.showMessageDialog(null, "valor inválido em "
-                        + "Despesa Com Peças");
-            }
-        } catch (Exception e) {
-            validador = false;
+            Validador = false;
             JOptionPane.showMessageDialog(null, "Digite apenas numeros "
-                    + "separados por '.' no campo quilometragem");
+                    + "separados por '.'");
         }
-        ////////////////////
-        if (ValorServF.getText().isEmpty()) {
-            validador = false;
-            JOptionPane.showMessageDialog(null, "Preencha um valor para "
-                    + "Despesa com Serviço");
+        /////
+        if (DescF.getText().isEmpty()) {
+            Validador = false;
+            JOptionPane.showMessageDialog(null, "Preencha a descrição");
         }
-
-        try {
-            if (Double.parseDouble(ValorServF.getText()) < 0) {
-                validador = false;
-                JOptionPane.showMessageDialog(null, "valor inválido em "
-                        + "Despesa Com Serviço");
-            }
-        } catch (Exception e) {
-            validador = false;
-            JOptionPane.showMessageDialog(null, "Digite apenas numeros "
-                    + "separados por '.' no campo Despesa com Serviço");
-        }
-        /////////
-        if (ServF.getText().isEmpty()) {
-            validador = false;
-            JOptionPane.showMessageDialog(null, "Preencha a descrição do serviço");
-        }
-
-        //////////
-        if (validador) {
-
-            Manutencao m = new Manutencao();
-            ManutencaoDAO dao = new ManutencaoDAO();
-
+        ////
+        if (Validador) {
+            OutrosGastos og = new OutrosGastos();
+            OutrosGastosDAO dao = new OutrosGastosDAO();
             String dd = diabox.getSelectedItem().toString();
             String MM = mesbox.getSelectedItem().toString();
             String yyyy = anobox.getSelectedItem().toString();
@@ -306,36 +246,33 @@ public class NovaManutencao extends javax.swing.JFrame {
                     break;
             }
             String data = dd + "/" + MM + "/" + yyyy;
+
             try {
-                m.setData(data);
+                og.setData(data);
             } catch (ParseException ex) {
-                Logger.getLogger(NovaManutencao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistrarOutrosGastos.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao converter a data. nada foi salvo.");
                 dispose();
             }
+            og.setValor(Double.parseDouble(ValorF.getText()));
+            og.setDesc(DescF.getText());
 
-            m.setKm(Integer.parseInt(kmF.getText()));
-            m.setServico(ServF.getText());
-            m.setValorPecas(Double.parseDouble(ValorPecasF.getText()));
-            m.setValorServ(Double.parseDouble(ValorServF.getText()));
-            m.setVeiculo(this.veiculo.getIdVeiculo());
-
-            int z = JOptionPane.showConfirmDialog(null, "Confirma esta "
-                    + "Manutenção para o Veículo " + veiculo.toString() + " ?");
+            int z = JOptionPane.showConfirmDialog(null, "Confirma este "
+                    + "Gasto para o Veículo " + veiculo.toString() + " ?");
 
             if (z == 0) {
 
                 try {
-                    dao.salvar(m);
-                    JOptionPane.showMessageDialog(null, "Manutenção registrada");
+                    dao.salvar(og);
+                    JOptionPane.showMessageDialog(null, "Dispesa Registrada");
                     dispose();
                 } catch (SQLException ex) {
-                    Logger.getLogger(NovaManutencao.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, "Erro ao registrar Manutenção\n" + ex);
+                    Logger.getLogger(RegistrarOutrosGastos.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Erro ao gravar na base de dados\n" + ex);
                 } catch (IOException ex) {
-                    Logger.getLogger(NovaManutencao.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(RegistrarOutrosGastos.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "Erro de entrada e saida "
-                            + "ao registrar Manutenção\n" + ex);
+                            + "ao gravar na base de dados\n" + ex);
                 }
             } else if (z == 1) {
                 JOptionPane.showMessageDialog(null, "Ação cancelada.");
@@ -363,38 +300,34 @@ public class NovaManutencao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NovaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NovaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NovaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NovaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarOutrosGastos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NovaManutencao().setVisible(true);
+                new RegistrarOutrosGastos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea ServF;
-    private javax.swing.JTextField ValorPecasF;
-    private javax.swing.JTextField ValorServF;
+    private javax.swing.JTextArea DescF;
+    private javax.swing.JTextField ValorF;
     private javax.swing.JComboBox<String> anobox;
     private javax.swing.JComboBox<String> diabox;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField kmF;
     private javax.swing.JComboBox<String> mesbox;
     // End of variables declaration//GEN-END:variables
 }
