@@ -143,10 +143,35 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             getArray(),
             new String [] {
-                "ID", "Data", "Combustivel", "Preço/Litro", "Valor total", "Posto"
+                "ID", "Data", "Combustível", "Preço do Litro", "Valor Total", "Posto"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(30);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(250);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(120);
+        }
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -179,7 +204,7 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1088, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
