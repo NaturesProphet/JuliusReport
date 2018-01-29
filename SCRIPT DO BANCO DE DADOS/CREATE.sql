@@ -74,6 +74,7 @@ CREATE TABLE Rendimento (
 	REFERENCES Trajeto (rowid)
 );
 
+
 CREATE TABLE Manutencao (
 	Data DATETIME,
 	Km INT,
