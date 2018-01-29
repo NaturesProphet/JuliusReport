@@ -37,7 +37,7 @@ public class ManutencaoDAO implements DAO {
     public void salvar(Object o) throws SQLException, IOException{
         if (o instanceof Manutencao) {
             Manutencao manutencao = (Manutencao) o;
-            String sql = "INSERT INTO Manutencao VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO Manutencao VALUES (?,?,?,?,?,?)";
                 Connection con = new ConnectionFactory().getConnection();
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, manutencao.getDataAsString());
@@ -45,6 +45,7 @@ public class ManutencaoDAO implements DAO {
                 ps.setDouble(3, manutencao.getValorPecas());
                 ps.setDouble(4, manutencao.getValorServ());
                 ps.setString(5, manutencao.getServico());
+                ps.setInt(6, manutencao.getVeiculo());
                 ps.execute();
                 System.out.println("Manutencao registrada.");
                 ps.close();

@@ -79,7 +79,8 @@ CREATE TABLE Manutencao (
 	Km INT,
 	ValorPecas FLOAT(5,2),
 	ValorServ FLOAT(5,2),
-	Servico VARCHAR(255) NOT NULL
+	Servico VARCHAR(255) NOT NULL,
+        Veiculo INT
 );
 
 

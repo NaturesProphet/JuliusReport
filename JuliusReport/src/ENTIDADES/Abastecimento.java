@@ -29,15 +29,15 @@ import java.util.logging.Logger;
  * @author mgarcia
  */
 public class Abastecimento {
-    Date Data;
-    Double ValorTotal;
-    int TipoCombustivel; //referencia Combustivel.IdCombustivel
-    Double ValorLitro;
-    int Posto;
-    int Veiculo;
-    int Usuario;
-    int km;
-    int IdAbastecimento;
+    private Date Data;
+    private Double ValorTotal;
+    private int TipoCombustivel; //referencia Combustivel.IdCombustivel
+    private Double ValorLitro;
+    private int Posto;
+    private int Veiculo;
+    private int Usuario;
+    private int km;
+    private int IdAbastecimento;
     
     public void setVeiculo(int v) {
         this.Veiculo = v;

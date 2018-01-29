@@ -23,6 +23,9 @@
                 <Property name="text" type="java.lang.String" value="Registrar nova Manuten&#xe7;&#xe3;o"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Novo2ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Novo3">
               <Properties>

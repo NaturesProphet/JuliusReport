@@ -28,6 +28,7 @@ import VIEW.Cadastros.NovoAbastecimento;
 import ENTIDADES.Usuario;
 import ENTIDADES.Veiculo;
 import VIEW.Cadastros.CadastrarPosto;
+import VIEW.Cadastros.NovaManutencao;
 import VIEW.Consultas.ConsultaAbastecimentos;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -185,6 +186,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         Novo2.setText("Registrar nova Manutenção");
         Novo2.setEnabled(false);
+        Novo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Novo2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(Novo2);
 
         Novo3.setText("Registrar Novos Gastos");
@@ -380,6 +386,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_Novo5ActionPerformed
+
+    private void Novo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo2ActionPerformed
+        new NovaManutencao(this.veiculo).setVisible(true);
+    }//GEN-LAST:event_Novo2ActionPerformed
 
     /**
      * @param args the command line arguments

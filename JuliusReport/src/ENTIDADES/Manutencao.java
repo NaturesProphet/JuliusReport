@@ -29,17 +29,26 @@ import java.util.logging.Logger;
  * @author mgarcia
  */
 public class Manutencao {
-    public Date Data;
-    public int Km;
-    public Double ValorPecas;
-    public Double ValorServ;
-    public String Servico;
-    public int IdManutencao;
+    private Date Data;
+    private int Km;
+    private Double ValorPecas;
+    private Double ValorServ;
+    private String Servico;
+    private int Veiculo;
+    private int IdManutencao;
     
+    
+    public void setVeiculo(int v) {
+        this.Veiculo = v;
+    }
+    
+    public int getVeiculo() {
+        return this.Veiculo;
+    }
     
     
     public void setData(String d) throws ParseException{
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         this.Data = df.parse(d);
     }
     
