@@ -1,31 +1,31 @@
 /*
-	Os IDs das tabelas não foram criados aqui
-	pois o SQLITE3 utiliza as rowid no lugar
-	das chaves primarias. estas rowids serao
-	recuperadas na aplicação e utilizadas nas
-	classes ao serem instanciadas a partir
-	dos dados do banco.
+Os IDs das tabelas não foram criados aqui
+pois o SQLITE3 utiliza as rowid no lugar
+das chaves primarias. estas rowids serao
+recuperadas na aplicação e utilizadas nas
+classes ao serem instanciadas a partir
+dos dados do banco.
 
-	Sim, eu sei... o estilo é PHP mas o 
-	codigo é Java.. Não pergunte, só aceite.
+Sim, eu sei... o estilo é PHP mas o 
+codigo é Java.. Não pergunte, só aceite.
 */
 CREATE TABLE Usuario (
-    Login VARCHAR(40) UNIQUE NOT NULL,
-    Senha VARCHAR(255) NOT NULL
+Login VARCHAR(40) UNIQUE NOT NULL,
+Senha VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Veiculo (
-	Tipo VARCHAR(30) NOT NULL,
-	Marca VARCHAR(30) NOT NULL,
-	Modelo VARCHAR(45) NOT NULL,
-	Ano INT NOT NULL,
-	Cor VARCHAR(20),
-	Placa VARCHAR(8) UNIQUE NOT NULL,
-	Usuario INT NOT NULL,
-        Anotacoes VARCHAR(255),
-        CONSTRAINT FK_Veiculo_Usuario
-        FOREIGN KEY (Usuario)
-        REFERENCES Usuario (rowid)
+Tipo VARCHAR(30) NOT NULL,
+Marca VARCHAR(30) NOT NULL,
+Modelo VARCHAR(45) NOT NULL,
+Ano INT NOT NULL,
+Cor VARCHAR(20),
+Placa VARCHAR(8) UNIQUE NOT NULL,
+Usuario INT NOT NULL,
+Anotacoes VARCHAR(255),
+CONSTRAINT FK_Veiculo_Usuario
+FOREIGN KEY (Usuario)
+REFERENCES Usuario (rowid)
 );
 
 CREATE TABLE Posto (
@@ -52,10 +52,10 @@ CREATE TABLE Abastecimento (
 	ValorTotal FLOAT(5,2),
 	TipoCombustivel INT,
 	ValorLitro FLOAT(2,2),
-        Posto VARCHAR(30),
-        Usuario INT NOT NULL,
-        Veiculo INT NOT NULL,
-        km INT,
+  Posto VARCHAR(30),
+  Usuario INT NOT NULL,
+  Veiculo INT NOT NULL,
+  km INT,
 	CONSTRAINT FK_Abastecimento_Combustivel
 	FOREIGN KEY (TipoCombustivel)
 	REFERENCES Combustivel (rowid)
