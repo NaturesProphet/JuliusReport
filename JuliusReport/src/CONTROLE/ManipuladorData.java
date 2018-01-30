@@ -29,7 +29,7 @@ import java.util.Date;
 public class ManipuladorData {
     
     public static Date getDate(String data) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.parse(data);
     }
     

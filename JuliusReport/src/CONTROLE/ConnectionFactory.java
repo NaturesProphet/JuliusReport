@@ -43,7 +43,6 @@ public class ConnectionFactory {
 
     public Connection getConnection() {
         try {
-            System.out.println(url);
             Connection con = DriverManager.getConnection(url);
             return con;
         } catch (SQLException ex) {

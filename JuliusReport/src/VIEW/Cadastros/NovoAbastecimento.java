@@ -504,7 +504,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                     MM = "12";
                     break;
             }
-            String dataAb = dd + "/" + MM + "/" + yyyy;
+            String dataAb = yyyy + "-" + MM + "-" + dd;
             try {
                 abastecimento.setData(ManipuladorData.getDate(dataAb));
             } catch (ParseException ex) {

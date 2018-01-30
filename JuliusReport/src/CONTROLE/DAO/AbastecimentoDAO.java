@@ -43,7 +43,7 @@ public class AbastecimentoDAO implements DAO {
         if (c instanceof Abastecimento) {
             Abastecimento abastecimento = (Abastecimento) c;
             //formatador me ajudará a manipular as datas nos processos de I/O no DB
-            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
             String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?,?,?,?,?)";
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
