@@ -36,7 +36,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="Novo3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/VIEW/img/sifrao.png"/>
+                  <Image iconType="3" name="/VIEW/img/sifrao22x22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registrar Novos Gastos"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -70,7 +70,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="Novo6">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/VIEW/img/uno-turbo.png"/>
+                  <Image iconType="3" name="/VIEW/img/uno-turbo-22x39.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar Ve&#xed;culo"/>
               </Properties>
@@ -81,7 +81,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="Novo7">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/VIEW/img/posto.png"/>
+                  <Image iconType="3" name="/VIEW/img/posto22x22.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar Posto de Combustivel"/>
               </Properties>

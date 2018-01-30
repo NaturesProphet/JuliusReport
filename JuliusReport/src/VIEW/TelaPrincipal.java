@@ -198,7 +198,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo2);
 
-        Novo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/sifrao.png"))); // NOI18N
+        Novo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/sifrao22x22.png"))); // NOI18N
         Novo3.setText("Registrar Novos Gastos");
         Novo3.setEnabled(false);
         Novo3.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +226,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo5);
 
-        Novo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/uno-turbo.png"))); // NOI18N
+        Novo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/uno-turbo-22x39.png"))); // NOI18N
         Novo6.setText("Cadastrar Veículo");
         Novo6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +235,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo6);
 
-        Novo7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/posto.png"))); // NOI18N
+        Novo7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/posto22x22.png"))); // NOI18N
         Novo7.setText("Cadastrar Posto de Combustivel");
         Novo7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
