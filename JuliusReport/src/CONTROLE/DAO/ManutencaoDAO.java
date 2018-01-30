@@ -26,6 +26,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,12 +39,13 @@ public class ManutencaoDAO implements DAO {
 
     @Override
     public void salvar(Object o) throws SQLException, IOException {
+        SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
         if (o instanceof Manutencao) {
             Manutencao manutencao = (Manutencao) o;
             String sql = "INSERT INTO Manutencao VALUES (?,?,?,?,?,?)";
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, manutencao.getDataAsString());
+            ps.setString(1, formatador.format(manutencao.getData()));
             ps.setInt(2, manutencao.getKm());
             ps.setDouble(3, manutencao.getValorPecas());
             ps.setDouble(4, manutencao.getValorServ());

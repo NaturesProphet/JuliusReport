@@ -48,7 +48,7 @@ public class Manutencao {
     
     
     public void setData(String d) throws ParseException{
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         this.Data = df.parse(d);
     }
     

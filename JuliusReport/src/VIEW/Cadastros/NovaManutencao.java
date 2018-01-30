@@ -305,7 +305,7 @@ public class NovaManutencao extends javax.swing.JFrame {
                     MM = "12";
                     break;
             }
-            String data = dd + "/" + MM + "/" + yyyy;
+            String data = yyyy + "-" + MM + "-" + dd;
             try {
                 m.setData(data);
             } catch (ParseException ex) {
