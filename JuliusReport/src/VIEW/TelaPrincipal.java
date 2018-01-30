@@ -178,6 +178,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Novo");
 
+        Novo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/gasstation_22x22.png"))); // NOI18N
         Novo1.setText("Registrar novo Abastecimento");
         Novo1.setEnabled(false);
         Novo1.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +188,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo1);
 
+        Novo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/download.png"))); // NOI18N
         Novo2.setText("Registrar nova Manutenção");
         Novo2.setEnabled(false);
         Novo2.addActionListener(new java.awt.event.ActionListener() {
@@ -196,6 +198,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo2);
 
+        Novo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/sifrao.png"))); // NOI18N
         Novo3.setText("Registrar Novos Gastos");
         Novo3.setEnabled(false);
         Novo3.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +208,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo3);
 
+        Novo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/trajeto22x22.png"))); // NOI18N
         Novo4.setText("Cadastrar novo tipo de Trajeto");
         Novo4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,6 +217,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo4);
 
+        Novo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/combustivel22x29.png"))); // NOI18N
         Novo5.setText("Cadastrar novo tipo de Combustivel");
         Novo5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +226,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo5);
 
+        Novo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/uno-turbo.png"))); // NOI18N
         Novo6.setText("Cadastrar Veículo");
         Novo6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +235,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo6);
 
+        Novo7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/posto.png"))); // NOI18N
         Novo7.setText("Cadastrar Posto de Combustivel");
         Novo7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,7 +325,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 247, Short.MAX_VALUE))
+                .addGap(0, 265, Short.MAX_VALUE))
         );
 
         pack();

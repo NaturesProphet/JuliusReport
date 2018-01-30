@@ -164,6 +164,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
         jLabel7.setText("Posto");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/salvar16x16.png"))); // NOI18N
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

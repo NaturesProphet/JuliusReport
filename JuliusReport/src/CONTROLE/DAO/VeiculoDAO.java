@@ -75,7 +75,7 @@ public class VeiculoDAO implements DAO {
             AbastecimentoDAO dao = new AbastecimentoDAO();
             Abastecimento ab = new Abastecimento();
             try {
-                ab.setData("01/01/01");
+                ab.setData("0000-00-00");
             } catch (ParseException ex) {
                 Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
