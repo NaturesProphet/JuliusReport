@@ -26,6 +26,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,13 +40,17 @@ public class OutrosGastosDAO implements DAO {
     @Override
     public void salvar(Object o) throws SQLException, IOException {
         if (o instanceof OutrosGastos) {
+             SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
             OutrosGastos outrosgastos = (OutrosGastos) o;
-            String sql = "INSERT INTO OutrosGastos VALUES (?,?,?)";
+            String sql = "INSERT INTO OutrosGastos VALUES (?,?,?,?)";
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, outrosgastos.getDataAsString());
+            
+            ps.setString(1, formatador.format(outrosgastos.getData()));
+            
             ps.setDouble(2, outrosgastos.getValor());
             ps.setString(3, outrosgastos.getDesc());
+            ps.setInt(4, outrosgastos.getIdVeiculo());
             ps.execute();
             System.out.println("Outros Gastos registrado.");
             ps.close();

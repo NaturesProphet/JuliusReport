@@ -245,7 +245,7 @@ public class RegistrarOutrosGastos extends javax.swing.JFrame {
                     MM = "12";
                     break;
             }
-            String data = dd + "/" + MM + "/" + yyyy;
+            String data = yyyy + "-" + MM + "-" + dd;
 
             try {
                 og.setData(data);
@@ -256,6 +256,7 @@ public class RegistrarOutrosGastos extends javax.swing.JFrame {
             }
             og.setValor(Double.parseDouble(ValorF.getText()));
             og.setDesc(DescF.getText());
+            og.setIdVeiculo(veiculo.getIdVeiculo());
 
             int z = JOptionPane.showConfirmDialog(null, "Confirma este "
                     + "Gasto para o Veículo " + veiculo.toString() + " ?");
