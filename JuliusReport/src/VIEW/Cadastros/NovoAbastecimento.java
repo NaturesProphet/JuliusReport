@@ -23,7 +23,7 @@ import CONTROLE.DAO.CombustivelDAO;
 import CONTROLE.DAO.PostoDAO;
 import CONTROLE.DAO.RendimentoDAO;
 import CONTROLE.DAO.TrajetoDAO;
-import CONTROLE.ManipuladorData;
+import CONTROLE.UTIL.Data;
 import ENTIDADES.Abastecimento;
 import ENTIDADES.Posto;
 import ENTIDADES.Rendimento;
@@ -507,7 +507,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
             }
             String dataAb = yyyy + "-" + MM + "-" + dd;
             try {
-                abastecimento.setData(ManipuladorData.getDate(dataAb));
+                abastecimento.setData(Data.getDataFromStringYMD(dataAb));
             } catch (ParseException ex) {
                 Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao gravar a data\n" + ex);
