@@ -33,6 +33,7 @@ import VIEW.Cadastros.RegistrarOutrosGastos;
 import VIEW.Consultas.ConsultaAbastecimentos;
 import VIEW.Consultas.ConsultaManutencao;
 import VIEW.Consultas.ConsultaOutrosGastos;
+import VIEW.Consultas.ConsultaRendimento;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -274,6 +275,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem8);
 
         jMenuItem9.setText("Consultar histórico de consumo");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem9);
 
         jMenuBar1.add(jMenu2);
@@ -428,6 +434,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
        new ConsultaOutrosGastos(veiculo).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        try {
+            new ConsultaRendimento(this,true,veiculo).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this,"Erro de Entrada e Saida\n"+ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this,"Erro de Consulta\n"+ex);
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments

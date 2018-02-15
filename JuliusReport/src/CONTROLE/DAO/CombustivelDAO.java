@@ -84,6 +84,7 @@ public class CombustivelDAO implements DAO {
         Connection con = new ConnectionFactory().getConnection();
         String sql = "SELECT Nome FROM Combustivel WHERE rowid = ?";
         PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, IdCombustivel);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             return rs.getString(1);

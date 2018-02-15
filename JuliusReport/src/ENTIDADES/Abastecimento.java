@@ -86,8 +86,7 @@ public class Abastecimento {
     
     //retorna uma string formatada como dd/MM/yyyy com a data
     public String getDataAsString() {
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-        return formatador.format(this.Data);
+        return CONTROLE.UTIL.Data.getDataAsStringBR(this.Data);
     }
     
     public Date getData() {

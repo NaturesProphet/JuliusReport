@@ -78,10 +78,12 @@ public class RendimentoDAO implements DAO {
         ArrayList<Rendimento> lista = new ArrayList();
         StringBuilder query = new StringBuilder();
         query.append("SELECT Rendimento.rowid, Rendimento.KmL, ");
-        query.append("Rendimento.Trajeto, Rendimento.ArCond ");
+        query.append("Rendimento.Trajeto, Rendimento.ArCond, ");
+        query.append("Rendimento.Abastecimento ");
         query.append("FROM Rendimento JOIN  Abastecimento ON ");
         query.append("Rendimento.Abastecimento = Abastecimento.rowid ");
-        query.append("WHERE Abastecimento.Veiculo = ?");
+        query.append("WHERE Abastecimento.Veiculo = ? ");
+        query.append("ORDER BY Rendimento.KmL DESC, Abastecimento.Data");
         
         Connection con = new ConnectionFactory().getConnection();
         PreparedStatement ps = con.prepareStatement(query.toString());
@@ -93,6 +95,7 @@ public class RendimentoDAO implements DAO {
             r.setKmL(rs.getDouble(2));
             r.setTrajeto(rs.getInt(3));
             r.setArCond(rs.getString(4));
+            r.SetAbastecimento(rs.getInt(5));
             lista.add(r);
         }
         rs.close();

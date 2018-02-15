@@ -146,7 +146,7 @@ public class AbastecimentoDAO implements DAO {
         Abastecimento a = new Abastecimento();
 
         Connection con = new ConnectionFactory().getConnection();
-        String sql = "SELECT rowid, * FROM ABASTECIMENTO WHERE rowid = ?";
+        String sql = "SELECT rowid, * FROM Abastecimento WHERE rowid = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, IdAbastecimento);

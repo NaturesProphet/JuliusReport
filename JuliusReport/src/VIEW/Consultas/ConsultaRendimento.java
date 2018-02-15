@@ -64,6 +64,7 @@ public class ConsultaRendimento extends javax.swing.JDialog {
         
         lista = Rdao.getAll(v.getIdVeiculo());
         initComponents();
+        VeiculoLabel.setText("Veículo pesquisado: "+v.toString());
     }
 
     public Object[][] getArray() {
@@ -78,6 +79,7 @@ public class ConsultaRendimento extends javax.swing.JDialog {
             Rendimento rendimento = lista.get(i);
             try {
                 ab = Adao.getById(rendimento.getAbastecimento());
+                //JOptionPane.showMessageDialog(this, ""+ab.getValorLitro()); debug
                 combustivel = Cdao.getByID(ab.getTipoCombustivel());
                 Trajeto = Tdao.getByID(rendimento.getTrajeto());
             } catch (IOException ex) {
@@ -93,7 +95,7 @@ public class ConsultaRendimento extends javax.swing.JDialog {
             for (int y = 0; y < 6; y++) {
                 switch (y) {
                     case 0:
-                        matrix[i][y] = "" + ab.getDataAsString();
+                        matrix[i][y] = ab.getDataAsString();
                         break;
                     case 1:
                         matrix[i][y] = combustivel;
@@ -105,7 +107,7 @@ public class ConsultaRendimento extends javax.swing.JDialog {
                     case 3:
                         Double ckm;
                         ckm = ab.getValorLitro() / rendimento.getKmL();
-                        matrix[i][y] = String.format("%.2f", ckm);
+                        matrix[i][y] = "R$ "+ String.format("%.2f", ckm);
                         break;
                     case 4:
                         matrix[i][y] = Trajeto;
@@ -131,17 +133,13 @@ public class ConsultaRendimento extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        VeiculoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CONSULTA DE RENDIMENTOS");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"30/12/2018", "Gasolina Aditivada", "14,55", "R$ 0,275", "Estrada - Condições Diversas", "Uso moderado/economico"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
+            getArray(),
             new String [] {
                 "Data", "Combustivel", "Km/L", "Custo por Km", "Trajeto", "Ar Condicionado"
             }
@@ -173,20 +171,25 @@ public class ConsultaRendimento extends javax.swing.JDialog {
             jTable1.getColumnModel().getColumn(4).setMaxWidth(300);
         }
 
+        VeiculoLabel.setText("Veiculo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(VeiculoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 73, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VeiculoLabel))
         );
 
         pack();
@@ -236,6 +239,7 @@ public class ConsultaRendimento extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel VeiculoLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
