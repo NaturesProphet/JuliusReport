@@ -31,6 +31,9 @@ import VIEW.Cadastros.CadastrarPosto;
 import VIEW.Cadastros.NovaManutencao;
 import VIEW.Cadastros.RegistrarOutrosGastos;
 import VIEW.Consultas.ConsultaAbastecimentos;
+import VIEW.Consultas.ConsultaManutencao;
+import VIEW.Consultas.ConsultaOutrosGastos;
+import VIEW.Consultas.ConsultaRendimento;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -126,6 +129,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Julius Report");
+        setBackground(new java.awt.Color(255, 0, 36));
         setExtendedState(MAXIMIZED_BOTH);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -176,6 +180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Novo");
 
+        Novo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/gasstation_22x22.png"))); // NOI18N
         Novo1.setText("Registrar novo Abastecimento");
         Novo1.setEnabled(false);
         Novo1.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +190,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo1);
 
+        Novo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/download.png"))); // NOI18N
         Novo2.setText("Registrar nova Manutenção");
         Novo2.setEnabled(false);
         Novo2.addActionListener(new java.awt.event.ActionListener() {
@@ -194,6 +200,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo2);
 
+        Novo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/sifrao22x22.png"))); // NOI18N
         Novo3.setText("Registrar Novos Gastos");
         Novo3.setEnabled(false);
         Novo3.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +210,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo3);
 
+        Novo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/trajeto22x22.png"))); // NOI18N
         Novo4.setText("Cadastrar novo tipo de Trajeto");
         Novo4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +219,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo4);
 
+        Novo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/combustivel22x29.png"))); // NOI18N
         Novo5.setText("Cadastrar novo tipo de Combustivel");
         Novo5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +228,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo5);
 
+        Novo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/uno-turbo-22x39.png"))); // NOI18N
         Novo6.setText("Cadastrar Veículo");
         Novo6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,6 +237,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(Novo6);
 
+        Novo7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/posto22x22.png"))); // NOI18N
         Novo7.setText("Cadastrar Posto de Combustivel");
         Novo7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,12 +259,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setText("Consultar historico de Manutenção");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuItem8.setText("Consultar histórico de outros gastos ");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuItem9.setText("Consultar histórico de consumo");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem9);
 
         jMenuBar1.add(jMenu2);
@@ -306,7 +332,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 247, Short.MAX_VALUE))
+                .addGap(0, 265, Short.MAX_VALUE))
         );
 
         pack();
@@ -400,6 +426,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void Novo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Novo3ActionPerformed
         new RegistrarOutrosGastos(this.veiculo).setVisible(true);
     }//GEN-LAST:event_Novo3ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        new ConsultaManutencao(veiculo).setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+       new ConsultaOutrosGastos(veiculo).setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        try {
+            new ConsultaRendimento(this,true,veiculo).setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this,"Erro de Entrada e Saida\n"+ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this,"Erro de Consulta\n"+ex);
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments

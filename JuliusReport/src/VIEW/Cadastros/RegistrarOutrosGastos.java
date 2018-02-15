@@ -103,6 +103,7 @@ public class RegistrarOutrosGastos extends javax.swing.JFrame {
         DescF.setRows(5);
         jScrollPane1.setViewportView(DescF);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/salvar16x16.png"))); // NOI18N
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,7 +246,7 @@ public class RegistrarOutrosGastos extends javax.swing.JFrame {
                     MM = "12";
                     break;
             }
-            String data = dd + "/" + MM + "/" + yyyy;
+            String data = yyyy + "-" + MM + "-" + dd;
 
             try {
                 og.setData(data);
@@ -256,6 +257,7 @@ public class RegistrarOutrosGastos extends javax.swing.JFrame {
             }
             og.setValor(Double.parseDouble(ValorF.getText()));
             og.setDesc(DescF.getText());
+            og.setIdVeiculo(veiculo.getIdVeiculo());
 
             int z = JOptionPane.showConfirmDialog(null, "Confirma este "
                     + "Gasto para o Veículo " + veiculo.toString() + " ?");

@@ -23,7 +23,7 @@ import CONTROLE.DAO.CombustivelDAO;
 import CONTROLE.DAO.PostoDAO;
 import CONTROLE.DAO.RendimentoDAO;
 import CONTROLE.DAO.TrajetoDAO;
-import CONTROLE.ManipuladorData;
+import CONTROLE.UTIL.Data;
 import ENTIDADES.Abastecimento;
 import ENTIDADES.Posto;
 import ENTIDADES.Rendimento;
@@ -164,6 +164,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
         jLabel7.setText("Posto");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/img/salvar16x16.png"))); // NOI18N
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +189,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 153));
 
-        ArCondF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o status do Ar.","Desligado sempre", "Ligado sempre", "Uso moderado/econômico"}));
+        ArCondF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o status do Ar.","Desligado sempre", "Ligado sempre", "Uso moderado/econômico", "Pouco uso"}));
 
         jLabel8.setText("Considerando a situação em que você rodou com este veículo");
 
@@ -294,44 +295,41 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(9, 9, 9)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)))
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel12))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(diabox, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mesbox, 0, 103, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(anobox, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(19, 19, 19)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(KmF)
+                                        .addComponent(PostoF, 0, 258, Short.MAX_VALUE)
+                                        .addComponent(ValorTotalF)
+                                        .addComponent(ValorLitroF)
+                                        .addComponent(CombF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel3))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                                            .addComponent(jLabel6)))
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel4))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(diabox, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(mesbox, 0, 103, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(anobox, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(KmF)
-                                            .addComponent(PostoF, 0, 258, Short.MAX_VALUE)
-                                            .addComponent(ValorTotalF)
-                                            .addComponent(ValorLitroF)
-                                            .addComponent(CombF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel12)))))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -437,9 +435,9 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
         if (!radioSIM.isSelected() && !radioNAO.isSelected()) {
             Validador = false;
-            JOptionPane.showMessageDialog(null, "Marque uma das opções abaixo para"
+            JOptionPane.showMessageDialog(null, "Marque uma das opções abaixo para "
                     + "definir se os dados de consumo \ne rendimento serão gerados"
-                    + "e armazenados na base de dados.");
+                    + " e armazenados na base de dados.");
         }
 
         if (radioSIM.isSelected()) {
@@ -507,9 +505,9 @@ public class NovoAbastecimento extends javax.swing.JFrame {
                     MM = "12";
                     break;
             }
-            String dataAb = dd + "/" + MM + "/" + yyyy;
+            String dataAb = yyyy + "-" + MM + "-" + dd;
             try {
-                abastecimento.setData(ManipuladorData.getDate(dataAb));
+                abastecimento.setData(Data.getDataFromStringYMD(dataAb));
             } catch (ParseException ex) {
                 Logger.getLogger(NovoAbastecimento.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Erro ao gravar a data\n" + ex);

@@ -21,8 +21,6 @@ package ENTIDADES;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -58,7 +56,7 @@ public class Abastecimento {
     
     //recebe uma string dd/MM/yyyy como data e joga exceções pra cima
     public void setData(String d) throws ParseException{
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         this.Data = df.parse(d);
     }
     
@@ -88,8 +86,7 @@ public class Abastecimento {
     
     //retorna uma string formatada como dd/MM/yyyy com a data
     public String getDataAsString() {
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-        return formatador.format(this.Data);
+        return CONTROLE.UTIL.Data.getDataAsStringBR(this.Data);
     }
     
     public Date getData() {

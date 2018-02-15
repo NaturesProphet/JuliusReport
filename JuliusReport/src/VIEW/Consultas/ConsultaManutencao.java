@@ -18,14 +18,12 @@
  */
 package VIEW.Consultas;
 
-import CONTROLE.DAO.AbastecimentoDAO;
-import CONTROLE.DAO.CombustivelDAO;
-import CONTROLE.DAO.PostoDAO;
-import ENTIDADES.Abastecimento;
-import ENTIDADES.Usuario;
+import CONTROLE.DAO.ManutencaoDAO;
+import ENTIDADES.Manutencao;
 import ENTIDADES.Veiculo;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,91 +33,80 @@ import javax.swing.JOptionPane;
  *
  * @author mgarcia
  */
-public class ConsultaAbastecimentos extends javax.swing.JFrame {
+public class ConsultaManutencao extends javax.swing.JFrame {
 
-    Usuario usuario;
     Veiculo veiculo;
-    ArrayList<Abastecimento> lista;
-    ArrayList<String> combustiveis;
+    ManutencaoDAO dao;
+    Double total;
+    ArrayList<Manutencao> lista;
 
     /**
-     * Creates new form ConsultaAbastecimentos
+     * Creates new form ConsultaManutencao
      */
+    public ConsultaManutencao() {
+        initComponents();
+    }
+
+    public ConsultaManutencao(Veiculo v) {
+        this.veiculo = v;
+        dao = new ManutencaoDAO();
+        try {
+            lista = dao.getAll(v.getIdVeiculo());
+        } catch (IOException ex) {
+            Logger.getLogger(ConsultaManutencao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro de entrada e saída\n" + ex);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaManutencao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao recuperar dados do banco\n" + ex);
+            dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(ConsultaManutencao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro de conversão numérica\n" + ex);
+            dispose();
+        }
+        initComponents();
+        total = 0.0;
+        Double Pecas = 0.0;
+        Double Serv = 0.0;
+        for (int i = 0; i < lista.size(); i++) {
+            total += lista.get(i).getValorServ() + lista.get(i).getValorPecas();
+            Pecas += lista.get(i).getValorPecas();
+            Serv += lista.get(i).getValorServ();
+        }
+        TotalLabel.setText("Total R$: " + String.format("%.2f", total));
+        VLabel.setText("Veículo pesquisado: " + veiculo.toString());
+        ServLabel.setText("Mão de obra R$: " + String.format("%.2f", Serv));
+        PecaLabel.setText("Peças R$: " + String.format("%.2f", Pecas));
+    }
+
     //este metodo gerará a matriz de dados que alimentarão a tabela
     public Object[][] getArray() {
         int length = lista.size();
-        Object[][] matrix = new String[length][6];
+        Object[][] matrix = new String[length][4];
 
         for (int i = 0; i < length; i++) {
-            Abastecimento ab = lista.get(i);
-            for (int y = 0; y < 6; y++) {
+            Manutencao man = lista.get(i);
+            for (int y = 0; y < 4; y++) {
                 switch (y) {
                     case 0:
-                        matrix[i][y] = "" + ab.getIdAbastecimento();
+                        matrix[i][y] = "" + man.getIdManutencao();
                         break;
                     case 1:
-                        matrix[i][y] = ab.getDataAsString();
+                        matrix[i][y] = man.getDataAsString();
                         break;
                     case 2:
-                        int comb = ab.getTipoCombustivel();
-                        comb--;
-                        matrix[i][y] = combustiveis.get(comb);
+                        Double vtotal = man.getValorPecas() + man.getValorServ();
+                        matrix[i][y] = String.format("%.2f", vtotal);
                         break;
                     case 3:
-                        matrix[i][y] = String.format("%.2f", ab.getValorLitro());
-                        break;
-                    case 4:
-                        matrix[i][y] = String.format("%.2f", ab.getValorTotal());
-                        break;
-                    case 5:
-                        PostoDAO postodao = new PostoDAO();
-                {
-                    try {
-                        matrix[i][y] = postodao.getById(ab.getPosto()).getNome();
-                    } catch (IOException ex) {
-                        Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+                        matrix[i][y] = man.getServico();
                         break;
                 }
             }
 
         }
         return matrix;
-    }
-
-    public ConsultaAbastecimentos() {
-        initComponents();
-    }
-
-    public ConsultaAbastecimentos(Usuario u, Veiculo v) {
-        usuario = u;
-        veiculo = v;
-        lista = new ArrayList<Abastecimento>();
-        combustiveis = new ArrayList<String>();
-        AbastecimentoDAO dao = new AbastecimentoDAO();
-        CombustivelDAO Cdao = new CombustivelDAO();
-
-        try {
-            lista = dao.getAll(usuario.getIdUsuario(), veiculo.getIdVeiculo());
-            combustiveis = Cdao.getAll();
-        } catch (IOException ex) {
-            Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro de entrada e saída! "
-                    + "confira o arquivo .DAT e o arquivo .DB\n" + ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao consultar o banco\n" + ex);
-        }
-        initComponents();
-        Double Total = 0.0;
-        for (int i = 0; i < lista.size(); i++) {
-            Total += lista.get(i).getValorTotal();
-        }
-        TotalLabel.setText("Total R$: "+ String.format("%.2f", Total));
-        VeiculoLabel.setText("Veículo pesquisado: " + veiculo.toString());
     }
 
     /**
@@ -135,19 +122,21 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         TotalLabel = new javax.swing.JLabel();
-        VeiculoLabel = new javax.swing.JLabel();
+        VLabel = new javax.swing.JLabel();
+        ServLabel = new javax.swing.JLabel();
+        PecaLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CONSULTA ABASTECIMENTOS");
+        setTitle("CONSULTA MANUTENÇÃO");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             getArray(),
             new String [] {
-                "ID", "Data", "Combustível", "Preço do Litro", "Valor Total", "Posto"
+                "ID", "Data", "Custo Total", "Serviço executado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -156,45 +145,51 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(30);
+            jTable1.getColumnModel().getColumn(0).setMinWidth(20);
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(120);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(250);
-            jTable1.getColumnModel().getColumn(3).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(120);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(120);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(80);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(110);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
         }
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        TotalLabel.setText("Total R$: ");
+        TotalLabel.setText("Valor Total:");
 
-        VeiculoLabel.setText("Veiculo");
+        VLabel.setText("Veículo pesquisado:");
+
+        ServLabel.setText("ValorServ");
+
+        PecaLabel.setText("ValorPeça");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(VeiculoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ServLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PecaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(TotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-                .addComponent(VeiculoLabel))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TotalLabel)
+                    .addComponent(VLabel)
+                    .addComponent(ServLabel)
+                    .addComponent(PecaLabel))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,7 +199,7 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -212,10 +207,10 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,27 +234,29 @@ public class ConsultaAbastecimentos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaAbastecimentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaManutencao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaAbastecimentos().setVisible(true);
+                new ConsultaManutencao().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel PecaLabel;
+    private javax.swing.JLabel ServLabel;
     private javax.swing.JLabel TotalLabel;
-    private javax.swing.JLabel VeiculoLabel;
+    private javax.swing.JLabel VLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

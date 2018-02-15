@@ -18,7 +18,7 @@
  */
 package CONTROLE;
 
-import static CONTROLE.ManipuladorArquivo.ler;
+import CONTROLE.UTIL.Arquivo;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,19 +36,19 @@ public class ConnectionFactory {
     private String url = "jdbc:sqlite:" + patch;
 
     public ConnectionFactory() throws IOException {
-            patch = ler("BD.dat");
+            patch = Arquivo.getFirstLine("BD.dat");
             url = "jdbc:sqlite:" + patch;
     }
 
 
     public Connection getConnection() {
         try {
-            System.out.println(url);
             Connection con = DriverManager.getConnection(url);
             return con;
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Nao conectou ao sqlite\n"+ex);
+            JOptionPane.showMessageDialog(null,"Inpossível conectar ao Banco de Dados\n"+ex);
         }
         return null;
     }

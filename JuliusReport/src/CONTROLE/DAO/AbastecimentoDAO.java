@@ -19,7 +19,7 @@
 package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
-import CONTROLE.ManipuladorData;
+import CONTROLE.UTIL.Data;
 import ENTIDADES.Abastecimento;
 import java.io.IOException;
 import java.sql.Connection;
@@ -42,12 +42,10 @@ public class AbastecimentoDAO implements DAO {
     public void salvar(Object c) throws SQLException, IOException {
         if (c instanceof Abastecimento) {
             Abastecimento abastecimento = (Abastecimento) c;
-            //formatador me ajudará a manipular as datas nos processos de I/O no DB
-            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
             String sql = "INSERT INTO Abastecimento VALUES(?,?,?,?,?,?,?,?)";
             Connection con = new ConnectionFactory().getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, formatador.format(abastecimento.getData())); //so proud to understand dat shit
+            ps.setString(1, Data.getDataAsStringUS(abastecimento.getData()));
             ps.setDouble(2, abastecimento.getValorTotal());
             ps.setInt(3, abastecimento.getTipoCombustivel());
             ps.setDouble(4, abastecimento.getValorLitro());
@@ -148,7 +146,7 @@ public class AbastecimentoDAO implements DAO {
         Abastecimento a = new Abastecimento();
 
         Connection con = new ConnectionFactory().getConnection();
-        String sql = "SELECT rowid, * FROM ABASTECIMENTO WHERE rowid = ?";
+        String sql = "SELECT rowid, * FROM Abastecimento WHERE rowid = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setInt(1, IdAbastecimento);

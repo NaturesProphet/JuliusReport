@@ -18,7 +18,7 @@
  */
 package VIEW;
 
-import CONTROLE.ManipuladorArquivo;
+import CONTROLE.UTIL.Arquivo;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -38,8 +38,9 @@ public class Configuracoes extends javax.swing.JFrame {
     public Configuracoes() {
         initComponents();
         try {
-            patchTF.setText(ManipuladorArquivo.ler("BD.dat"));
+            patchTF.setText(Arquivo.getFirstLine("BD.dat"));
         } catch (IOException ex) {
+            System.out.println("Erro ao ler arquivo BD.dat\n"+ex);
             Logger.getLogger(Configuracoes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -150,9 +151,10 @@ public class Configuracoes extends javax.swing.JFrame {
         File f = fc.getSelectedFile();
         patchTF.setText( f.getPath() );
         try {
-            ManipuladorArquivo.escrever("BD.dat", f.getPath());
+            Arquivo.setFileContentAsSingleLine("BD.dat", f.getPath());
         } catch (IOException ex) {
             Logger.getLogger(Configuracoes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this,"Erro ao configurar BD.dat\n"+ex);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed

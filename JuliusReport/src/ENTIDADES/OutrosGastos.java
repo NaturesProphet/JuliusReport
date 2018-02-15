@@ -33,10 +33,20 @@ public class OutrosGastos {
     private Date Data;
     private Double Valor;
     private String Desc;
+    private int IdVeiculo;
     private int IdOutrosGastos;
 
+    
+    public void setIdVeiculo(int id) {
+        this.IdVeiculo = id;
+    }
+    
+    public int getIdVeiculo(){
+        return this.IdVeiculo;
+    }
+    
     public void setData(String d) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         this.Data = df.parse(d);
     }
 
