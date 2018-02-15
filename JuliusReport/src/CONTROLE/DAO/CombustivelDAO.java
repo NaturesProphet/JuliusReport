@@ -19,7 +19,6 @@
 package CONTROLE.DAO;
 
 import CONTROLE.ConnectionFactory;
-import CONTROLE.DAO.DAO;
 import ENTIDADES.Combustivel;
 import java.io.IOException;
 import java.sql.Connection;
@@ -27,45 +26,41 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author mgarcia
  */
-public class CombustivelDAO implements DAO{
-    
+public class CombustivelDAO implements DAO {
+
     @Override
-    public void salvar(Object o) throws SQLException, IOException{
+    public void salvar(Object o) throws SQLException, IOException {
         if (o instanceof Combustivel) {
             Combustivel combustivel = (Combustivel) o;
             String sql = "INSERT INTO Combustivel VALUES (?)";
-                Connection con = new ConnectionFactory().getConnection();
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, combustivel.getNome());
-                ps.execute();
-                System.out.println("Abastecimento registrado.");
-                ps.close();
-                con.close();
-            
-            
+            Connection con = new ConnectionFactory().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, combustivel.getNome());
+            ps.execute();
+            System.out.println("Abastecimento registrado.");
+            ps.close();
+            con.close();
+
         } else {
             System.out.println("O objeto informado não pertende a classe Combustivel");
         }
     }
-    
+
     @Override
     public void atualizar(Object o) {
         System.out.println("Método não implementado ainda..");
     }
-    
+
     @Override
     public void excluir(Object o) {
         System.out.println("Método não implementado ainda..");
     }
-    
-    
+
     //retorna uma lista de strings simples contendo codigo e nome do combustivel
     public ArrayList<String> getAll() throws IOException, SQLException {
         ArrayList<String> lista = new ArrayList();
@@ -81,8 +76,18 @@ public class CombustivelDAO implements DAO{
         ps.close();
         con.close();
         rs.close();
-        
-        
+
         return lista;
+    }
+
+    public String getByID(int IdCombustivel) throws IOException, SQLException {
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT Nome FROM Combustivel WHERE rowid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getString(1);
+        }
+        return "ERRO";
     }
 }

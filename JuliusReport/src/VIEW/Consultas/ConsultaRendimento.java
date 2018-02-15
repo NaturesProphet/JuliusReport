@@ -19,21 +19,32 @@
 package VIEW.Consultas;
 
 import CONTROLE.DAO.AbastecimentoDAO;
+import CONTROLE.DAO.CombustivelDAO;
 import CONTROLE.DAO.RendimentoDAO;
+import CONTROLE.DAO.TrajetoDAO;
 import ENTIDADES.Abastecimento;
+import ENTIDADES.Combustivel;
+import ENTIDADES.Rendimento;
 import ENTIDADES.Veiculo;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author mgarcia
  */
 public class ConsultaRendimento extends javax.swing.JDialog {
-    ArrayList<Abastecimento> lista;
+
+    ArrayList<Rendimento> lista;
     RendimentoDAO Rdao;
     AbastecimentoDAO Adao;
+    CombustivelDAO Cdao;
+    TrajetoDAO Tdao;
     Veiculo veiculo;
-    
 
     /**
      * Creates new form ConsultaRendimento
@@ -42,19 +53,72 @@ public class ConsultaRendimento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
-    public ConsultaRendimento(java.awt.Frame parent, boolean modal, Veiculo v) {
+
+    public ConsultaRendimento(java.awt.Frame parent, boolean modal, Veiculo v)
+            throws IOException, SQLException {
         super(parent, modal);
         Rdao = new RendimentoDAO();
         Adao = new AbastecimentoDAO();
+        Cdao = new CombustivelDAO();
+        Tdao = new TrajetoDAO();
         
-        
-        
-        
-        
+        lista = Rdao.getAll(v.getIdVeiculo());
         initComponents();
     }
-    
+
+    public Object[][] getArray() {
+        int length = lista.size();
+        Object[][] matrix = new String[length][6];
+
+        Abastecimento ab = new Abastecimento();
+        String combustivel = "";
+        String Trajeto = "";
+        
+        for (int i = 0; i < length; i++) {
+            Rendimento rendimento = lista.get(i);
+            try {
+                ab = Adao.getById(rendimento.getAbastecimento());
+                combustivel = Cdao.getByID(ab.getTipoCombustivel());
+                Trajeto = Tdao.getByID(rendimento.getTrajeto());
+            } catch (IOException ex) {
+                Logger.getLogger(ConsultaRendimento.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Erro de Entrada e Saida\n" + ex);
+                dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConsultaRendimento.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Erro de pesquisa\n" + ex);
+                dispose();
+            }
+
+            for (int y = 0; y < 6; y++) {
+                switch (y) {
+                    case 0:
+                        matrix[i][y] = "" + ab.getDataAsString();
+                        break;
+                    case 1:
+                        matrix[i][y] = combustivel;
+                        break;
+                    case 2:
+                        Double kml = rendimento.getKmL();
+                        matrix[i][y] = String.format("%.2f", kml);
+                        break;
+                    case 3:
+                        Double ckm;
+                        ckm = ab.getValorLitro() / rendimento.getKmL();
+                        matrix[i][y] = String.format("%.2f", ckm);
+                        break;
+                    case 4:
+                        matrix[i][y] = Trajeto;
+                        break;
+                    case 5:
+                        matrix[i][y] = rendimento.getArCond();
+                        break;
+                }
+            }
+
+        }
+        return matrix;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

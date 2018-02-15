@@ -33,20 +33,20 @@ import java.util.logging.Logger;
  *
  * @author mgarcia
  */
-public class TrajetoDAO implements DAO{
+public class TrajetoDAO implements DAO {
 
     @Override
-    public void salvar(Object o) throws SQLException, IOException{
+    public void salvar(Object o) throws SQLException, IOException {
         if (o instanceof Trajeto) {
             Trajeto trajeto = (Trajeto) o;
             String sql = "INSERT INTO Trajeto VALUES (?)";
-                Connection con = new ConnectionFactory().getConnection();
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, trajeto.getNome());
-                ps.execute();
-                System.out.println("Trajeto registrado.");
-                ps.close();
-                con.close();
+            Connection con = new ConnectionFactory().getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, trajeto.getNome());
+            ps.execute();
+            System.out.println("Trajeto registrado.");
+            ps.close();
+            con.close();
         } else {
             System.out.println("O objeto informado não é um Trajeto");
         }
@@ -61,7 +61,7 @@ public class TrajetoDAO implements DAO{
     public void excluir(Object o) {
         System.out.println("Não implementado..");
     }
-    
+
     public ArrayList<Trajeto> getAll() throws IOException, SQLException {
         ArrayList<Trajeto> lista = new ArrayList();
         Connection con = new ConnectionFactory().getConnection();
@@ -78,5 +78,17 @@ public class TrajetoDAO implements DAO{
         con.close();
         return lista;
     }
-    
+
+    public String getByID(int IdTrajeto) throws IOException, SQLException {
+        Connection con = new ConnectionFactory().getConnection();
+        String sql = "SELECT Nome FROM Trajeto WHERE rowid = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, IdTrajeto);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getString(1);
+        }
+        return "ERRO";
+    }
+
 }
