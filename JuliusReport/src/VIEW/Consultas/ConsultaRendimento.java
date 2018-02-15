@@ -18,11 +18,22 @@
  */
 package VIEW.Consultas;
 
+import CONTROLE.DAO.AbastecimentoDAO;
+import CONTROLE.DAO.RendimentoDAO;
+import ENTIDADES.Abastecimento;
+import ENTIDADES.Veiculo;
+import java.util.ArrayList;
+
 /**
  *
  * @author mgarcia
  */
 public class ConsultaRendimento extends javax.swing.JDialog {
+    ArrayList<Abastecimento> lista;
+    RendimentoDAO Rdao;
+    AbastecimentoDAO Adao;
+    Veiculo veiculo;
+    
 
     /**
      * Creates new form ConsultaRendimento
@@ -31,6 +42,19 @@ public class ConsultaRendimento extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public ConsultaRendimento(java.awt.Frame parent, boolean modal, Veiculo v) {
+        super(parent, modal);
+        Rdao = new RendimentoDAO();
+        Adao = new AbastecimentoDAO();
+        
+        
+        
+        
+        
+        initComponents();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
