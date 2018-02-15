@@ -34,7 +34,9 @@ public class Data {
     *   ou o inverso, transformar strings formatadas em data.
     *   Autor: Mateus Garcia
     *   github.com/NaturesProphet
-     */
+    */
+    
+    
     //devolve uma string formatada no padrão brasileiro
     public static String getDataAsStringBR(Date d) {
         SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
@@ -62,7 +64,7 @@ public class Data {
         SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
         return dmy.parse(d);
     }
-
+    
     //devolve um java.util.Date pela string parão US fornecida
     public static Date getDataFromStringYMD(String d) throws ParseException {
         SimpleDateFormat dmy = new SimpleDateFormat("yyyy-MM-dd");

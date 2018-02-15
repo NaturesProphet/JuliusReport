@@ -38,9 +38,7 @@ public class Arquivo {
     *   Classe que fornece utilidades para manipulação de arquivos de texto puro
     *   Autor: Mateus Garcia
     *   github.com/NaturesProphet
-    */
-    
-    
+     */
     //lê a primeira linha de um arquivo informado pelo parâmetro
     public static String getFirstLine(String path) throws IOException {
         if (AreYouHere(path)) {
@@ -55,7 +53,7 @@ public class Arquivo {
     }
 
     //escreve o conteúdo da String no arquivo, informados via parâmetro
-    public static void setFileContent(String path, String content)
+    public static void setFileContentAsSingleLine(String path, String content)
             throws IOException {
         if (AreYouHere(path)) {
             BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
@@ -131,6 +129,40 @@ public class Arquivo {
         }
     }
 
+    // configura o texto de uma linha que comece com o codigo informado
+    // oposto do método acima ^
+    public static void setLineByCode(String path, String Code, String insert) throws IOException {
+        if (AreYouHere(path)) {
+
+            ArrayList<String> AllLines = getAllLines(path);
+            boolean IsRedundant = false;
+
+            for (int i = 0; i < AllLines.size(); i++) {
+                if (IsAComent(AllLines.get(i), '#')) {
+                    continue;
+                } else {
+                    if (Code.equals(getFirstStringFromLine(AllLines.get(i)))) {
+                        if (!IsRedundant) {
+                            AllLines.set(i, Code + " " + insert);
+                            IsRedundant = true;
+                        } else {
+                            throw new IOException("O programa tentou alterar"
+                                    + " uma linha do arquivo " + path
+                                    + " mas o codigo " + Code + " foi encontrado"
+                                    + "mais de uma vez, causando um conflito"
+                                    + "Por segurança, nenhuma "
+                                    + "alteração foi feita.");
+                        }
+                    }
+                }
+            }
+            OverWrite(path, AllLines);
+        } else {
+            throw new FileNotFoundException("O programa buscou por um arquivo "
+                    + "que não foi encontrado no local especificado");
+        }
+    }
+
     //verifica se o arquivo especificado existe
     public static boolean AreYouHere(String patch) {
         File file = new File(patch);
@@ -169,7 +201,7 @@ public class Arquivo {
     public static void AddThisLineAtBOF(String path, String texto) throws IOException {
         if (AreYouHere(path)) {
             ArrayList<String> conteudoanterior = getAllLines(path);
-            setFileContent(path, texto);
+            setFileContentAsSingleLine(path, texto);
             for (int i = 0; i < conteudoanterior.size(); i++) {
                 AddThisLineAtEOF(path, conteudoanterior.get(i));
             }
@@ -180,4 +212,39 @@ public class Arquivo {
         }
     }
 
+    //este método retorna a primeira string sem espaços encontrada numa linha
+    public static String getFirstStringFromLine(String linha) {
+        StringBuilder sb = new StringBuilder(10);
+        if (!linha.isEmpty()) {
+            boolean PrimeiroEspaco = true;
+            for (int i = 0; i < linha.length(); i++) {
+                if (linha.charAt(i) == ' ' && PrimeiroEspaco) {
+                    continue;
+                } else {
+                    PrimeiroEspaco = false;
+                }
+                if (!PrimeiroEspaco) {
+                    if (linha.charAt(i) != ' ') {
+                        sb.append(linha.charAt(i));
+                    } else {
+                        return sb.toString();
+                    }
+                }
+            }
+        }
+        return sb.toString(); //se a linha for vazia retorna nada
+    }
+
+    //metodo para sobreescrever um arquivo com a lista de strings informada
+    public static void OverWrite(String path, ArrayList<String> Content) throws IOException {
+        if (AreYouHere(path)) {
+            setFileContentAsSingleLine(path, Content.get(0));
+            for (int i = 1; i < Content.size(); i++) {
+                AddThisLineAtEOF(path, Content.get(i));
+            }
+        } else {
+            throw new FileNotFoundException("O programa buscou por um arquivo "
+                    + "que não foi encontrado no local especificado");
+        }
+    }
 }

@@ -151,9 +151,10 @@ public class Configuracoes extends javax.swing.JFrame {
         File f = fc.getSelectedFile();
         patchTF.setText( f.getPath() );
         try {
-            Arquivo.setFileContent("BD.dat", f.getPath());
+            Arquivo.setFileContentAsSingleLine("BD.dat", f.getPath());
         } catch (IOException ex) {
             Logger.getLogger(Configuracoes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this,"Erro ao configurar BD.dat\n"+ex);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
