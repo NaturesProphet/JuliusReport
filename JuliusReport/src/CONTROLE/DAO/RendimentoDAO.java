@@ -83,7 +83,7 @@ public class RendimentoDAO implements DAO {
         query.append("FROM Rendimento JOIN  Abastecimento ON ");
         query.append("Rendimento.Abastecimento = Abastecimento.rowid ");
         query.append("WHERE Abastecimento.Veiculo = ? ");
-        query.append("ORDER BY Rendimento.KmL DESC, Abastecimento.Data");
+        query.append("ORDER BY Abastecimento.Data");
         
         Connection con = new ConnectionFactory().getConnection();
         PreparedStatement ps = con.prepareStatement(query.toString());
