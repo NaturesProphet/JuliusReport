@@ -189,7 +189,7 @@ public class NovoAbastecimento extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 153));
 
-        ArCondF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o status do Ar.","Desligado sempre", "Ligado sempre", "Uso moderado/econômico", "Pouco uso"}));
+        ArCondF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o status do Ar.", "Desligado sempre", "Pouco uso", "Uso moderado/econômico", "Uso intenso", "Ligado sempre"}));
 
         jLabel8.setText("Considerando a situação em que você rodou com este veículo");
 
