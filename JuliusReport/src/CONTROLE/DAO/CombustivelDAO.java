@@ -89,6 +89,7 @@ public class CombustivelDAO implements DAO {
         if (rs.next()) {
             return rs.getString(1);
         }
+        con.close();
         return "ERRO";
     }
 }
