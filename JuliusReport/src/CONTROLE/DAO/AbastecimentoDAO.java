@@ -138,6 +138,7 @@ public class AbastecimentoDAO implements DAO {
             a.setkm(rs.getInt(9));
 
         }
+        con.close();
         return a;
 
     }
@@ -168,6 +169,7 @@ public class AbastecimentoDAO implements DAO {
             a.setkm(rs.getInt(9));
 
         }
+        con.close();
         return a;
     }
 }
