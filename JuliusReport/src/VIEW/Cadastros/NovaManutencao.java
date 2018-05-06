@@ -279,10 +279,10 @@ public class NovaManutencao extends javax.swing.JFrame {
                     MM = "03";
                     break;
                 case "abril":
-                    MM = "05";
+                    MM = "04";
                     break;
                 case "maio":
-                    MM = "06";
+                    MM = "05";
                     break;
                 case "junho":
                     MM = "06";
