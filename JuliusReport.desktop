@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=JuliusReport
+Comment=JuliusReport
+Exec=java -jar /home/mgarcia/GitProjects/JuliusReport/JuliusReport/dist/JuliusReport.jar
+Path=/home/mgarcia/GitProjects/JuliusReport/JuliusReport/dist/
+Icon=java
+Terminal=false
+Type=Application
+Categories=GNOME;Application;
+StartupNotify=true
+
