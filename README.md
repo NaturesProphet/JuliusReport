@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/NaturesProphet/JuliusReport.svg?branch=master)](https://travis-ci.org/NaturesProphet/JuliusReport)
 # JuliusReport
 
 Autor: Mateus Garcia ( github.com/NaturesProphet )
